@@ -7,11 +7,11 @@
         ul.nav.nav-pills.navbar-nav.mr-auto.align-items-center.justify-content-between
             - if session[:user_id]
                 li.nav.item.me-2.link-light
-                    = button_to 'logout', logout_path, 
-                        method: :delete,
+                    = link_to 'logout', logout_path, method: :delete,
+                        data: { turbo: false },
                         class: 'nav-link link-light'
             - else
                 li.nav-item.me-2
-                    = button_to 'login', auth_request_path(:github), 
-                        method: :post,
+                    = link_to 'login', auth_request_path(:github), method: :post,
+                        data: { turbo: false },
                         class: 'nav-link link-light'
