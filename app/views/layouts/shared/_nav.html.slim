@@ -1,0 +1,19 @@
+.container-fluid.p-1.me-2.mb-2.bg-dark
+    .navbar.navbar-expand-md
+      #navbarToggler.collapse.navbar-collapse
+        ul.nav.nav-pills.flex-grow-1.navbar-nav
+            li.nav-item.me-2
+                = "кнопка"
+        ul.nav.nav-pills.navbar-nav.mr-auto.align-items-center.justify-content-between
+            - if true
+                li.nav.item.me-2.link-light
+                    = "кнопка"
+                li.nav-item.me-2
+                    = "кнопка"
+                li.nav-item.me-2
+                    = "кнопка"
+            - else
+                li.nav-item.me-2
+                    = "кнопка"
+                li.nav-item.me-2
+                    = "кнопка"
