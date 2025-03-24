@@ -11,3 +11,6 @@ lint:
 
 tests:
 	rake test
+
+env:
+	cp .env.example .env

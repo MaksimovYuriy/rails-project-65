@@ -5,15 +5,13 @@
             li.nav-item.me-2
                 = "кнопка"
         ul.nav.nav-pills.navbar-nav.mr-auto.align-items-center.justify-content-between
-            - if true
+            - if session[:user_id]
                 li.nav.item.me-2.link-light
-                    = "кнопка"
-                li.nav-item.me-2
-                    = "кнопка"
-                li.nav-item.me-2
-                    = "кнопка"
+                    = button_to 'logout', logout_path, 
+                        method: :delete,
+                        class: 'nav-link link-light'
             - else
                 li.nav-item.me-2
-                    = "кнопка"
-                li.nav-item.me-2
-                    = "кнопка"
+                    = button_to 'login', auth_request_path(:github), 
+                        method: :post,
+                        class: 'nav-link link-light'
