@@ -14,7 +14,6 @@ module Web
             @bulletin = current_user.bulletins.build(bulletin_params)
 
             if @bulletin.save
-                @bulletin.image.variant(resize_to_limit: [800, 800]).processed if @bulletin.image.attached?
                 redirect_to root_path, notice: 'Bulletin was successfully created.'
             else
                 redirect_to root_path, notice: 'Some error on creating.'
