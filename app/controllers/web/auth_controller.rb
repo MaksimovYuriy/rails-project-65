@@ -1,5 +1,5 @@
 module Web
-    class AuthController < ApplicationController
+    class AuthController < Web::ApplicationController
         def callback
             auth = request.env['omniauth.auth']
             user = User.find_or_create_by(email: auth.info.email) do |u|

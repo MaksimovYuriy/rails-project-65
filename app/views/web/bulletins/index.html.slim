@@ -1,0 +1,8 @@
+- @bulletins.each do |bulletin|
+  container.p-1
+    .card
+      .card-body.m-1
+        h4.card-title.m-2
+          = link_to bulletin.title, bulletin_path(bulletin), class: 'nav-link link-dark'
+        - if bulletin.image.attached?
+            = image_tag bulletin.image.variant(resize: '300x300'), class: 'card-img-top'
