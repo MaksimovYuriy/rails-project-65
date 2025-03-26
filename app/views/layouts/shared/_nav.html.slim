@@ -7,11 +7,9 @@
         ul.nav.nav-pills.navbar-nav.mr-auto.align-items-center.justify-content-between
             - if session[:user_id]
                 li.nav.item.me-2.link-light
-                    = simple_form_for :github_logout, url: logout_path,
-                        method: :delete, html: { data: { turbo: false } } do |f|
-                        = f.button :submit, 'Logout'
+                    = button_to 'Logout', auth_logout_path, data: { turbo: false },
+                        method: :delete
             - else
                 li.nav-item.me-2
-                    = simple_form_for :github_login, url: auth_request_path(:github), 
-                        method: :post, html: { data: { turbo: false } } do |f|
-                        = f.button :submit, 'Login with GitHub'
+                    = button_to 'Login (GitHub)', auth_request_path(:github),
+                        data: { turbo: false }, method: :post
