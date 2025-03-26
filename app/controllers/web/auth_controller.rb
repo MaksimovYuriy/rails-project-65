@@ -13,5 +13,6 @@ module Web
             session[:user_id] = nil
             redirect_to root_path, notice: "You logout"
         end
+
     end
 end
