@@ -1,9 +1,22 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  title: MyString
-  description: MyText
+  title: 'Bulletin title 1'
+  description: 'Bulletin description 1'
+  user: one
+  category: one
+  image: test/fixtures/files/image.png
 
 two:
-  title: MyString
-  description: MyText
+  title: 'Bulletin title 2'
+  description: 'Bulletin description 2'
+  user: two
+  category: two
+  image: test/fixtures/files/image.png
+
+three:
+  title: 'Bulletin title 3'
+  description: 'Bulletin description 3'
+  user: two
+  category: three
+  image: test/fixtures/files/image.png  
