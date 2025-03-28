@@ -1,0 +1,9 @@
+.x-bulletin
+    strong
+        = @bulletin.title
+    strong
+        = @bulletin.description
+    strong
+        = @bulletin.user.name
+    .x-bulletin-image
+        = image_tag @bulletin.image

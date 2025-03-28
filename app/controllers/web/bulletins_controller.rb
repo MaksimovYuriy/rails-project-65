@@ -4,13 +4,16 @@ module Web
 
         def index
             @bulletins = Bulletin.order(created_at: :desc)
+            authorize @bulletins
         end
 
         def new
-            @bulletin = Bulletin.new
+            @bulletin = current_user.bulletins.build
+            authorize @bulletin
         end
 
         def create
+            authorize Bulletin
             @bulletin = current_user.bulletins.build(bulletin_params)
 
             if @bulletin.save
@@ -21,6 +24,8 @@ module Web
         end
 
         def show
+            @bulletin = Bulletin.find(params[:id])
+            authorize @bulletin
         end
 
         private
