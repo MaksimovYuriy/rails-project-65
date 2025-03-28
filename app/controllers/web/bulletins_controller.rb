@@ -33,11 +33,5 @@ module Web
         def bulletin_params
             params.require(:bulletin).permit(:title, :description, :category_id, :image)
         end
-
-        def authenticate_user!
-            unless session[:user_id].present?
-                redirect_to root_path, alert: "Please log in to continue."
-            end
-        end
     end
 end
