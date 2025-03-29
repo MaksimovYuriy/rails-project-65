@@ -1,4 +1,31 @@
 class Bulletin < ApplicationRecord
+
+  include AASM
+
+  aasm do
+    state :draft, initial: true
+    state :under_moderation
+    state :rejected
+    state :published
+    state :archived
+
+    event :to_moderate do
+      transitions from: :draft, to: :under_moderation
+    end
+
+    event :reject do
+      transitions from: :under_moderation, to: :rejected
+    end
+
+    event :publish do
+      transitions from: :under_moderation, to: :published
+    end
+
+    event :archive do
+      transitions from: [:draft, :under_moderation, :rejected, :published], to: :archived
+    end
+  end
+
   belongs_to :user
   belongs_to :category
 

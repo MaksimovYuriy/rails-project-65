@@ -15,6 +15,7 @@ module Web
         def create
             authorize Bulletin, policy_class: Web::BulletinPolicy
             @bulletin = current_user.bulletins.build(bulletin_params)
+            @bulletin.to_moderate
 
             if @bulletin.save
                 redirect_to root_path, notice: 'Bulletin was successfully created.'
