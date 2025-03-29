@@ -1,0 +1,18 @@
+h1 Категории
+
+table.table
+  thead
+    tr
+      th ID
+      th Название
+      th Действия
+  tbody
+    - @categories.each do |category|
+      tr
+        td = category.id
+        td = category.name
+        td.actions
+          = link_to 'Редактировать', edit_category_path(category), class: 'btn btn-warning'
+          = link_to 'Удалить', category_path(category), data: { 'turbo-method' => :delete, 'turbo-confirm' => 'Are you sure?' }, class: 'btn btn-danger'
+
+= link_to 'Создать категорию', new_category_path

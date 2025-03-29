@@ -7,9 +7,8 @@ Rails.application.routes.draw do
     delete 'logout', to: 'auth#logout', as: :auth_logout
 
     resources :bulletins, only: %i[index show new create]
-
     scope module: :admin do
-      resources :categories
+      resources :categories, except: %i[show]
     end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

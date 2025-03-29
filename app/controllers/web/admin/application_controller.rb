@@ -1,3 +1,6 @@
-class Admin::Web::ApplicationController < Web::ApplicationController
-
+module Web
+    module Admin
+        class ApplicationController < Web::ApplicationController
+        end
+    end
 end
