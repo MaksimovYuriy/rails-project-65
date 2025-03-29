@@ -4,16 +4,16 @@ module Web
 
             def index
                 @categories = Category.all
-                authorize @categories
+                authorize @categories, policy_class: Web::Admin::CategoryPolicy
             end
 
             def new
-                authorize Category
+                authorize Category, policy_class: Web::Admin::CategoryPolicy
                 @category = Category.new
             end
 
             def create
-                authorize Category
+                authorize Category, policy_class: Web::Admin::CategoryPolicy
                 @category = Category.new(category_params)
 
                 if @category.save
@@ -25,12 +25,12 @@ module Web
 
             def edit
                 @category = Category.find(params[:id])
-                authorize @category
+                authorize @category, policy_class: Web::Admin::CategoryPolicy
             end
 
             def update
                 @category = Category.find(params[:id])
-                authorize @category
+                authorize @category, policy_class: Web::Admin::CategoryPolicy
 
                 if @category.update(category_params)
                     redirect_to categories_path, notice: 'Category succesfully updated.'
@@ -41,6 +41,7 @@ module Web
 
             def destroy
                 @category = Category.find(params[:id])
+                authorize @category, policy_class: Web::Admin::CategoryPolicy
                 @category&.destroy!
                 redirect_to categories_path, notice: 'Category succesfully deleted.'
             end

@@ -1,0 +1,14 @@
+h1 Объявления
+
+table.table
+  thead
+    tr
+      th ID
+      th Название
+      th Действия
+  tbody
+    - @bulletins.each do |bulletin|
+      tr
+        td = bulletin.id
+        td = link_to bulletin.title, bulletin_path(bulletin)
+        td.actions

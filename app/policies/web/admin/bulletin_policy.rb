@@ -1,4 +1,4 @@
-class CategoryPolicy < ApplicationPolicy
+class Web::Admin::BulletinPolicy < ApplicationPolicy
 
     def index?
         user&.admin?

@@ -9,7 +9,9 @@
                 li.nav.item.me-2.link-light
                     = link_to 'New bulletin', new_bulletin_path
                 li.nav.item.me-2.link-light
-                    = link_to 'Admin Panel', categories_path
+                    = link_to 'Admin Panel (Categories)', categories_path
+                li.nav.item.me-2.link-light
+                    = link_to 'Admin Panel (Bulletins)', admin_bulletins_path
                 li.nav.item.me-2.link-light
                     = button_to 'Logout', auth_logout_path, data: { turbo: false },
                         method: :delete

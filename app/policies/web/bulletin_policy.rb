@@ -1,4 +1,4 @@
-class BulletinPolicy < ApplicationPolicy
+class Web::BulletinPolicy < ApplicationPolicy
 
     def index?
         true

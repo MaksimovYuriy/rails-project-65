@@ -4,16 +4,16 @@ module Web
 
         def index
             @bulletins = Bulletin.order(created_at: :desc)
-            authorize @bulletins
+            authorize @bulletins, policy_class: Web::BulletinPolicy
         end
 
         def new
             @bulletin = current_user.bulletins.build
-            authorize @bulletin
+            authorize @bulletin, policy_class: Web::BulletinPolicy
         end
 
         def create
-            authorize Bulletin
+            authorize Bulletin, policy_class: Web::BulletinPolicy
             @bulletin = current_user.bulletins.build(bulletin_params)
 
             if @bulletin.save
@@ -25,7 +25,7 @@ module Web
 
         def show
             @bulletin = Bulletin.find(params[:id])
-            authorize @bulletin
+            authorize @bulletin, policy_class: Web::BulletinPolicy
         end
 
         private
