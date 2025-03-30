@@ -9,7 +9,14 @@ Rails.application.routes.draw do
     resources :bulletins, only: %i[index show new create]
     scope module: :admin do
       resources :categories, except: %i[show]
-      resources :bulletins, only: %i[index], path: '/admin/bulletins', as: 'admin_bulletins'
+      resources :bulletins, only: %i[index], path: '/admin/bulletins', as: 'admin_bulletins' do
+        member do
+          patch :to_moderate
+          patch :reject
+          patch :publish
+          patch :archive
+        end
+      end
     end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

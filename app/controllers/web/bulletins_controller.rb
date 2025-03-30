@@ -3,7 +3,7 @@ module Web
         before_action :authenticate_user!, only: %i[ new create ]
 
         def index
-            @bulletins = Bulletin.order(created_at: :desc)
+            @bulletins = Bulletin.where(aasm_state: 'published').order(created_at: :desc)
             authorize @bulletins, policy_class: Web::BulletinPolicy
         end
 

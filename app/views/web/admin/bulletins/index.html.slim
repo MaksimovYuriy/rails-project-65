@@ -12,3 +12,15 @@ table.table
         td = bulletin.id
         td = link_to bulletin.title, bulletin_path(bulletin)
         td.actions
+          - if bulletin.may_to_moderate?
+            = link_to 'На модерацию', to_moderate_admin_bulletin_path(bulletin), data: { 'turbo-method' => :patch, 
+              'turbo-confirm' => 'Are you sure?' }, class: 'me-2'
+          - if bulletin.may_reject?
+            = link_to 'Вернуть', reject_admin_bulletin_path(bulletin), data: { 'turbo-method' => :patch, 
+              'turbo-confirm' => 'Are you sure?' }, class: 'me-2'
+          - if bulletin.may_publish?
+            = link_to 'Опубликовать', publish_admin_bulletin_path(bulletin), data: { 'turbo-method' => :patch, 
+              'turbo-confirm' => 'Are you sure?' }, class: 'me-2'
+          - if bulletin.may_archive?
+            = link_to 'В архив', archive_admin_bulletin_path(bulletin), data: { 'turbo-method' => :patch, 
+              'turbo-confirm' => 'Are you sure?' }, class: 'me-2 btn btn-danger'
