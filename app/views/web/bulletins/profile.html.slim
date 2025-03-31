@@ -1,0 +1,26 @@
+h1
+    = 'Мои объявления'
+h3
+    = link_to 'Создать объявление', new_bulletin_path
+
+table.table
+  thead
+    tr
+      th ID
+      th Название
+      th Статус
+      th Действия
+  tbody
+    - @bulletins.each do |bulletin|
+      tr
+        td = bulletin.id
+        td = link_to bulletin.title, bulletin_path(bulletin)
+        td = bulletin.aasm_state
+        td.actions
+          = link_to 'Показать', bulletin_path(bulletin), class: 'me-2'
+          - if bulletin.may_to_moderate?
+            = link_to 'На модерацию', to_moderate_bulletin_path(bulletin), data: { 'turbo-method' => :patch, 
+              'turbo-confirm' => 'Are you sure?' }, class: 'me-2'
+          - if bulletin.may_archive?
+            = link_to 'В архив', archive_bulletin_path(bulletin), data: { 'turbo-method' => :patch, 
+              'turbo-confirm' => 'Are you sure?' }, class: 'me-2 btn btn-danger'

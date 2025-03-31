@@ -28,4 +28,16 @@ class Web::BulletinPolicy < ApplicationPolicy
         user&.admin? || record.user_id == user.id 
     end
 
+    def profile?
+        record.all? { |bulletin| bulletin.user_id == user.id }
+    end
+
+    def to_moderate?
+        record.user_id == user.id
+    end
+
+    def archive?
+        record.user_id == user.id
+    end
+
 end

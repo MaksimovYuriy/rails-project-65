@@ -15,7 +15,6 @@ module Web
         def create
             authorize Bulletin, policy_class: Web::BulletinPolicy
             @bulletin = current_user.bulletins.build(bulletin_params)
-            @bulletin.to_moderate
 
             if @bulletin.save
                 redirect_to root_path, notice: 'Bulletin was successfully created.'
@@ -27,6 +26,25 @@ module Web
         def show
             @bulletin = Bulletin.find(params[:id])
             authorize @bulletin, policy_class: Web::BulletinPolicy
+        end
+
+        def profile
+            @bulletins = current_user.bulletins.order(created_at: :desc)
+            authorize @bulletins, policy_class: Web::BulletinPolicy
+        end
+
+        def to_moderate
+            @bulletin = Bulletin.find(params[:id])
+            authorize @bulletin, policy_class: Web::BulletinPolicy
+            @bulletin.to_moderate!
+            redirect_to profile_path           
+        end
+
+        def archive
+            @bulletin = Bulletin.find(params[:id])
+            authorize @bulletin, policy_class: Web::BulletinPolicy
+            @bulletin.archive!
+            redirect_to profile_path
         end
 
         private

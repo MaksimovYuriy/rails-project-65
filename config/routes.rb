@@ -6,7 +6,14 @@ Rails.application.routes.draw do
     get 'auth/:provider/callback', to: 'auth#callback', as: :callback_auth
     delete 'logout', to: 'auth#logout', as: :auth_logout
 
-    resources :bulletins, only: %i[index show new create]
+    resources :bulletins, only: %i[index show new create] do
+      member do
+        patch :to_moderate
+        patch :archive
+      end        
+    end
+    get 'profile', to: 'bulletins#profile', as: :profile
+
     scope module: :admin do
       resources :categories, except: %i[show]
       resources :bulletins, only: %i[index], path: '/admin/bulletins', as: 'admin_bulletins' do

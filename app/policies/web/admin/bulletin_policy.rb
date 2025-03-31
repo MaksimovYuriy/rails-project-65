@@ -28,4 +28,20 @@ class Web::Admin::BulletinPolicy < ApplicationPolicy
         user&.admin?
     end
 
+    def to_moderate?
+        user&.admin?
+    end
+
+    def reject?
+        user&.admin?
+    end
+
+    def publish?
+        user&.admin?
+    end
+
+    def archive?
+        user&.admin?
+    end
+
 end
