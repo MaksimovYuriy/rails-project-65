@@ -1,4 +1,4 @@
-= search_form_for @search_query, method: :get do |f|
+= search_form_for @search_query, url: do |f|
     = f.label :title_cont
     = f.search_field :title_cont
 

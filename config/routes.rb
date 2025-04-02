@@ -16,8 +16,8 @@ Rails.application.routes.draw do
       end        
     end
 
-    get 'profile', to: 'bulletins#profile', as: :profile
-    get 'profile/search', to: 'bulletins#profile_search', as: :profile_search
+    resource :profile, only: [:show], controller: 'bulletins', action: 'profile'
+  
 
     scope module: :admin do
       resources :categories, except: %i[show]
