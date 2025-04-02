@@ -26,6 +26,10 @@ class Bulletin < ApplicationRecord
     end
   end
 
+  def self.ransackable_attributes(auth_object = nil)
+    ["category_id", "title"]
+  end
+
   belongs_to :user
   belongs_to :category
 

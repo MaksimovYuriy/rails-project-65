@@ -29,7 +29,7 @@ class Web::BulletinPolicy < ApplicationPolicy
     end
 
     def profile?
-        record.all? { |bulletin| bulletin.user_id == user.id }
+        user
     end
 
     def to_moderate?

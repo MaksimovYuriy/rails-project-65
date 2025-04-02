@@ -3,7 +3,8 @@ module Web
         class BulletinsController < Web::Admin::ApplicationController
 
             def index
-                @bulletins = Bulletin.order(created_at: :desc)
+                @search_query = Bulletin.ransack(params[:search_query])
+                @bulletins = @search_query.result.order(created_at: :desc)
                 authorize @bulletins, policy_class: Web::Admin::BulletinPolicy
             end
 

@@ -3,7 +3,8 @@ module Web
         before_action :authenticate_user!, only: %i[ new create ]
 
         def index
-            @bulletins = Bulletin.where(aasm_state: 'published').order(created_at: :desc)
+            @search_query = Bulletin.ransack(params[:search_query])
+            @bulletins = @search_query.result.where(aasm_state: 'published').order(created_at: :desc)
             authorize @bulletins, policy_class: Web::BulletinPolicy
         end
 
@@ -29,8 +30,9 @@ module Web
         end
 
         def profile
-            @bulletins = current_user.bulletins.order(created_at: :desc)
-            authorize @bulletins, policy_class: Web::BulletinPolicy
+            @search_query = current_user.bulletins.ransack(params[:search_query])
+            @bulletins = @search_query.result.order(created_at: :desc)
+            authorize @bulletins, :profile?, policy_class: Web::BulletinPolicy
         end
 
         def to_moderate

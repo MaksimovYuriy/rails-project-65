@@ -1,0 +1,9 @@
+= search_form_for @search_query, url: profile_path, method: :get do |f|
+    = f.label :title_cont
+    = f.search_field :title_cont
+
+    = f.label :category_id_eq
+    = f.collection_select :category_id_eq, Category.all, :id, :name, include_blank: true
+
+    = f.submit
+    = link_to 'Сбросить', profile_path

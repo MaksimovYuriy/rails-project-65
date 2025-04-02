@@ -7,12 +7,17 @@ Rails.application.routes.draw do
     delete 'logout', to: 'auth#logout', as: :auth_logout
 
     resources :bulletins, only: %i[index show new create] do
+      collection do
+        get :search
+      end
       member do
         patch :to_moderate
         patch :archive
       end        
     end
+
     get 'profile', to: 'bulletins#profile', as: :profile
+    get 'profile/search', to: 'bulletins#profile_search', as: :profile_search
 
     scope module: :admin do
       resources :categories, except: %i[show]
