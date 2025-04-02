@@ -6,4 +6,6 @@
       h2
         = link_to bulletin.title, bulletin_path(bulletin), class: 'nav-link link-dark'
       - if bulletin.image.attached?
-        = image_tag bulletin.image, class: 'card-img-top' 
+        = image_tag bulletin.image, class: 'card-img-top'
+
+= paginate @bulletins
