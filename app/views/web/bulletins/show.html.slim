@@ -1,9 +1,14 @@
-.x-bulletin
-    strong
-        = @bulletin.title
-    strong
-        = @bulletin.description
+.x-bulletin-show
+  h1.x-bulletin-show-title = @bulletin.title
+
+  .x-bulletin-show-meta
+    p Опубликовано пользователем: 
     strong
         = @bulletin.user.name
-    .x-bulletin-image
-        = image_tag @bulletin.image
+
+  .x-bulletin-show-description
+    p = @bulletin.description
+
+  - if @bulletin.image.attached?
+    .x-bulletin-show-image
+      = image_tag @bulletin.image, class: 'img-fluid'

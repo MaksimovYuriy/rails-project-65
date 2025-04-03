@@ -1,9 +1,14 @@
-= search_form_for @search_query, url: do |f|
-    = f.label :title_cont
-    = f.search_field :title_cont
+.x-search-form
+  = search_form_for @search_query, url: do |f|
+    .x-search-group
+      = f.label :title_cont, 'Название', class: 'x-search-label'
+      = f.search_field :title_cont, class: 'x-search-input'
 
-    = f.label :category_id_eq
-    = f.collection_select :category_id_eq, Category.all, :id, :name, include_blank: true
+    .x-search-group
+      = f.label :category_id_eq, 'Категория', class: 'x-search-label'
+      = f.collection_select :category_id_eq, Category.all, :id, :name, { include_blank: 'Все категории' }, class: 'x-search-select'
 
-    = f.submit
-    = link_to 'Сбросить', url
+    .x-search-actions.mt-3
+      = f.submit 'Найти', class: 'x-search-btn'
+      = link_to 'Сбросить', url, class: 'x-search-reset'
+

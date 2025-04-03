@@ -34,7 +34,9 @@ module Web
 
         def profile
             @search_query = current_user.bulletins.ransack(params[:search_query])
-            @bulletins = @search_query.result.order(created_at: :desc)
+            @bulletins = @search_query.result
+                .order(created_at: :desc)
+                .page(params[:page])
             authorize @bulletins, :profile?, policy_class: Web::BulletinPolicy
         end
 

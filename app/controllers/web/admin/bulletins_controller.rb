@@ -4,7 +4,9 @@ module Web
 
             def index
                 @search_query = Bulletin.ransack(params[:search_query])
-                @bulletins = @search_query.result.order(created_at: :desc)
+                @bulletins = @search_query.result
+                    .order(created_at: :desc)
+                    .page(params[:page])
                 authorize @bulletins, policy_class: Web::Admin::BulletinPolicy
             end
 

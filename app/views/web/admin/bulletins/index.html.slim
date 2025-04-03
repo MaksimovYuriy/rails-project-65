@@ -26,3 +26,5 @@ table.table
           - if bulletin.may_archive?
             = link_to 'В архив', archive_admin_bulletin_path(bulletin), data: { 'turbo-method' => :patch, 
               'turbo-confirm' => 'Are you sure?' }, class: 'me-2 btn btn-danger'
+
+= paginate @bulletins
