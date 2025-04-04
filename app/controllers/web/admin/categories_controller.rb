@@ -17,7 +17,7 @@ module Web
                 @category = Category.new(category_params)
 
                 if @category.save
-                    redirect_to categories_path, notice: 'Category succesfully created.'
+                    redirect_to admin_categories_path, notice: 'Category succesfully created.'
                 else
                     redirect_to root_path, notice: 'Some error.'
                 end
@@ -33,7 +33,7 @@ module Web
                 authorize @category, policy_class: Web::Admin::CategoryPolicy
 
                 if @category.update(category_params)
-                    redirect_to categories_path, notice: 'Category succesfully updated.'
+                    redirect_to admin_categories_path, notice: 'Category succesfully updated.'
                 else
                     redirect_to root_path, notice: 'Some error.'
                 end
@@ -43,7 +43,7 @@ module Web
                 @category = Category.find(params[:id])
                 authorize @category, policy_class: Web::Admin::CategoryPolicy
                 @category&.destroy!
-                redirect_to categories_path, notice: 'Category succesfully deleted.'
+                redirect_to admin_categories_path, notice: 'Category succesfully deleted.'
             end
 
             private 

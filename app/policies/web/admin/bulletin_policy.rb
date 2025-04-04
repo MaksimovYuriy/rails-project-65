@@ -4,6 +4,10 @@ class Web::Admin::BulletinPolicy < ApplicationPolicy
         user&.admin?
     end
 
+    def on_moderate?
+        user&.admin?
+    end
+
     def new?
         user&.admin?
     end

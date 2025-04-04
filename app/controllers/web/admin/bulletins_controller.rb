@@ -10,6 +10,15 @@ module Web
                 authorize @bulletins, policy_class: Web::Admin::BulletinPolicy
             end
 
+            def on_moderate
+                @search_query = Bulletin.ransack(params[:search_query])
+                @bulletins = @search_query.result
+                    .where(aasm_state: 'under_moderation')
+                    .order(created_at: :desc)
+                    .page(params[:page])
+                authorize @bulletins, policy_class: Web::Admin::BulletinPolicy                
+            end
+
             def to_moderate
                 @bulletin = Bulletin.find(params[:id])
                 @bulletin.to_moderate!

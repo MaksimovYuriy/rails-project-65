@@ -20,7 +20,10 @@ Rails.application.routes.draw do
   
 
     scope module: :admin do
-      resources :categories, except: %i[show]
+
+      get '/admin', to: 'bulletins#on_moderate', as: 'admin'
+
+      resources :categories, except: %i[show], path: '/admin/categories', as: 'admin_categories'
       resources :bulletins, only: %i[index], path: '/admin/bulletins', as: 'admin_bulletins' do
         member do
           patch :to_moderate
