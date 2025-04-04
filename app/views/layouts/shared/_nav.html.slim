@@ -11,8 +11,11 @@
               = link_to 'Profile', profile_path, class: 'nav-link text-light'
             li.nav-item.me-2
               = link_to 'New bulletin', new_bulletin_path, class: 'nav-link text-light'
-            li.nav-item.me-2
-              = link_to 'Admin', admin_path, class: 'nav-link text-light'
+            
+            - if session[:user_admin] == true
+              li.nav-item.me-2
+                = link_to 'Admin', admin_path, class: 'nav-link text-light'
+                
             li.nav-item.me-2
               = button_to 'Logout', auth_logout_path, data: { turbo: false }, method: :delete, class: 'btn btn-outline-light'
           - else

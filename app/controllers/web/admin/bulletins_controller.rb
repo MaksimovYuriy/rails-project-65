@@ -7,7 +7,9 @@ module Web
                 @bulletins = @search_query.result
                     .order(created_at: :desc)
                     .page(params[:page])
-                authorize @bulletins, policy_class: Web::Admin::BulletinPolicy
+                @bulletins.each do |bulletin|
+                    authorize bulletin, policy_class: Web::Admin::BulletinPolicy
+                end
             end
 
             def on_moderate
@@ -16,7 +18,9 @@ module Web
                     .where(aasm_state: 'under_moderation')
                     .order(created_at: :desc)
                     .page(params[:page])
-                authorize @bulletins, policy_class: Web::Admin::BulletinPolicy                
+                @bulletins.each do |bulletin|
+                    authorize bulletin, policy_class: Web::Admin::BulletinPolicy
+                end              
             end
 
             def to_moderate
