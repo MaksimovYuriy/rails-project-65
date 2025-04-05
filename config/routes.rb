@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     get 'auth/:provider/callback', to: 'auth#callback', as: :callback_auth
     delete 'logout', to: 'auth#logout', as: :auth_logout
 
-    resources :bulletins, only: %i[index show new create] do
+    resources :bulletins, except: %i[destroy] do
       collection do
         get :search
       end

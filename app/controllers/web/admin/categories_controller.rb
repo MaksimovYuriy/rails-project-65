@@ -19,7 +19,7 @@ module Web
                 if @category.save
                     redirect_to admin_categories_path, notice: 'Category succesfully created.'
                 else
-                    redirect_to root_path, notice: 'Some error.'
+                    render :new, notice: 'Some error.'
                 end
             end
 
@@ -35,7 +35,7 @@ module Web
                 if @category.update(category_params)
                     redirect_to admin_categories_path, notice: 'Category succesfully updated.'
                 else
-                    redirect_to root_path, notice: 'Some error.'
+                    render :edit, status: :unprocessable_entity, notice: 'Some error.'
                 end
             end
 

@@ -23,13 +23,29 @@ module Web
             if @bulletin.save
                 redirect_to root_path, notice: 'Bulletin was successfully created.'
             else
-                redirect_to root_path, notice: 'Some error on creating.'
+                render :new, status: :unprocessable_entity
             end
         end
 
         def show
             @bulletin = Bulletin.find(params[:id])
             authorize @bulletin, policy_class: Web::BulletinPolicy
+        end
+
+        def edit
+            @bulletin = Bulletin.find(params[:id])
+            authorize @bulletin, policy_class: Web::BulletinPolicy
+        end
+
+        def update
+            @bulletin = Bulletin.find(params[:id])
+            authorize @bulletin, policy_class: Web::BulletinPolicy
+            
+            if @bulletin.update(bulletin_params)
+                redirect_to bulletin_path(@bulletin), notice: 'Succefully updated'
+            else
+                render :edit, status: :unprocessable_entity
+            end
         end
 
         def profile
