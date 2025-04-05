@@ -1,20 +1,21 @@
-h1 Категории
+h1 
+  = t('titles.categories')
 
 = render partial: 'web/admin/shared/nav'
 
 table.table
   thead
     tr
-      th ID
-      th Название
-      th Действия
+      th = t('attributes.id')
+      th = t('attributes.title')
+      th = t('attributes.actions')
   tbody
     - @categories.each do |category|
       tr
         td = category.id
         td = category.name
         td.actions
-          = link_to 'Редактировать', edit_admin_category_path(category), class: 'btn btn-warning me-2'
-          = link_to 'Удалить', admin_category_path(category), data: { 'turbo-method' => :delete, 'turbo-confirm' => 'Are you sure?' }, class: 'btn btn-danger me-2'
+          = link_to t('actions.edit'), edit_admin_category_path(category), class: 'btn btn-warning me-2'
+          = link_to t('actions.destroy'), admin_category_path(category), data: { 'turbo-method' => :delete, 'turbo-confirm' => 'Are you sure?' }, class: 'btn btn-danger me-2'
 
-= link_to 'Создать категорию', new_admin_category_path
+= link_to t('links.create_category'), new_admin_category_path

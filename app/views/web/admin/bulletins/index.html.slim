@@ -1,4 +1,5 @@
-h1 Объявления
+h1 
+  = t('titles.bulletins')
 
 = render partial: 'web/admin/shared/nav'
 
@@ -7,9 +8,9 @@ h1 Объявления
 table.table
   thead
     tr
-      th ID
-      th Название
-      th Действия
+      th = t('attributes.id')
+      th = t('attributes.title')
+      th = t('attributes.actions')
   tbody
     - @bulletins.each do |bulletin|
       tr
@@ -17,16 +18,16 @@ table.table
         td = link_to bulletin.title, bulletin_path(bulletin)
         td.actions
           - if bulletin.may_to_moderate?
-            = link_to 'На модерацию', to_moderate_admin_bulletin_path(bulletin), data: { 'turbo-method' => :patch, 
-              'turbo-confirm' => 'Are you sure?' }, class: 'me-2'
+            = link_to t('actions.to_moderate'), to_moderate_admin_bulletin_path(bulletin), data: { 'turbo-method' => :patch, 
+              'turbo-confirm' => t('confirmation') }, class: 'me-2'
           - if bulletin.may_reject?
-            = link_to 'Вернуть', reject_admin_bulletin_path(bulletin), data: { 'turbo-method' => :patch, 
-              'turbo-confirm' => 'Are you sure?' }, class: 'me-2'
+            = link_to t('actions.reject'), reject_admin_bulletin_path(bulletin), data: { 'turbo-method' => :patch, 
+              'turbo-confirm' => t('confirmation') }, class: 'me-2'
           - if bulletin.may_publish?
-            = link_to 'Опубликовать', publish_admin_bulletin_path(bulletin), data: { 'turbo-method' => :patch, 
-              'turbo-confirm' => 'Are you sure?' }, class: 'me-2'
+            = link_to t('actions.to_publish'), publish_admin_bulletin_path(bulletin), data: { 'turbo-method' => :patch, 
+              'turbo-confirm' => t('confirmation') }, class: 'me-2'
           - if bulletin.may_archive?
-            = link_to 'В архив', archive_admin_bulletin_path(bulletin), data: { 'turbo-method' => :patch, 
-              'turbo-confirm' => 'Are you sure?' }, class: 'me-2 btn btn-danger'
+            = link_to t('actions.archive'), archive_admin_bulletin_path(bulletin), data: { 'turbo-method' => :patch, 
+              'turbo-confirm' => t('confirmation') }, class: 'me-2 btn btn-danger'
 
 = paginate @bulletins

@@ -1,19 +1,17 @@
 h1
-    = 'Мои объявления'
+    = t('titles.profile')
 h3
-    = link_to 'Создать объявление', new_bulletin_path
-h3
-    = 'Поиск'
+    = link_to t('links.create_bulletin'), new_bulletin_path
 
 == render 'search_form', url: profile_path
 
 table.table
   thead
     tr
-      th ID
-      th Название
-      th Статус
-      th Действия
+      th = t('attributes.id')
+      th = t('attributes.title')
+      th = t('attributes.state')
+      th = t('attributes.actions')
   tbody
     - @bulletins.each do |bulletin|
       tr
@@ -21,12 +19,12 @@ table.table
         td = link_to bulletin.title, bulletin_path(bulletin)
         td = bulletin.aasm_state
         td.actions
-          = link_to 'Показать', bulletin_path(bulletin), class: 'me-2'
+          = link_to t('actions.show'), bulletin_path(bulletin), class: 'me-2'
           - if bulletin.may_to_moderate?
-            = link_to 'На модерацию', to_moderate_bulletin_path(bulletin), data: { 'turbo-method' => :patch, 
-              'turbo-confirm' => 'Are you sure?' }, class: 'me-2'
+            = link_to t('actions.to_moderate'), to_moderate_bulletin_path(bulletin), data: { 'turbo-method' => :patch, 
+              'turbo-confirm' => t('confirmation') }, class: 'me-2'
           - if bulletin.may_archive?
-            = link_to 'В архив', archive_bulletin_path(bulletin), data: { 'turbo-method' => :patch, 
-              'turbo-confirm' => 'Are you sure?' }, class: 'me-2 btn btn-danger'
+            = link_to t('actions.archive'), archive_bulletin_path(bulletin), data: { 'turbo-method' => :patch, 
+              'turbo-confirm' => t('confirmation') }, class: 'me-2 btn btn-danger'
 
 = paginate @bulletins

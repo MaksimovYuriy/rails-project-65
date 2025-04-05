@@ -2,7 +2,8 @@
   h1.x-bulletin-show-title = @bulletin.title
 
   .x-bulletin-show-meta
-    p Опубликовано пользователем: 
+    p 
+      = t('views.published_by')
     strong
         = @bulletin.user.name
 
