@@ -29,6 +29,20 @@ en:
     admin: 'Admin'
     login_github: 'Login (GitHub)'
     logout: 'Logout'
+  notices:
+    application:
+      not_authorized: 'Please log in to continue'
+      no_admin_rights: 'There are no administrator rights'
+    bulletins:
+      create: 'Bulletin was successfully created'
+      update: 'Bulletin was successfully updated'
+    categories:
+      create: 'Category was successfully created'
+      update: 'Category was successfully updated'
+      destroy: 'Category was successfully destroyed'
+    auth:
+      logged: 'You logged like'
+      logout: 'You logout'
   views:
     published_by: 'Published by'
   search:

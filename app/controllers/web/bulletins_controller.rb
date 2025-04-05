@@ -21,7 +21,7 @@ module Web
             @bulletin = current_user.bulletins.build(bulletin_params)
 
             if @bulletin.save
-                redirect_to root_path, notice: 'Bulletin was successfully created.'
+                redirect_to root_path, notice: I18n.t('notices.bulletins.create')
             else
                 render :new, status: :unprocessable_entity
             end
@@ -42,7 +42,7 @@ module Web
             authorize @bulletin, policy_class: Web::BulletinPolicy
             
             if @bulletin.update(bulletin_params)
-                redirect_to bulletin_path(@bulletin), notice: 'Succefully updated'
+                redirect_to bulletin_path(@bulletin), notice: I18n.t('notices.bulletins.update')
             else
                 render :edit, status: :unprocessable_entity
             end

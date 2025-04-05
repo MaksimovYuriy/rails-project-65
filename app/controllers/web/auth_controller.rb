@@ -7,13 +7,13 @@ module Web
             end
             session[:user_id] = user.id
             session[:user_admin] = user.admin?
-            redirect_to root_path, notice: "You logged like #{user.name}"
+            redirect_to root_path, notice: "#{I18n.t('notices.auth.logged')} #{user.name}"
         end
 
         def logout
             session[:user_id] = nil
             session[:user_admin] = nil
-            redirect_to root_path, notice: "You logout"
+            redirect_to root_path, notice: I18n.t('notices.auth.logout')
         end
 
     end

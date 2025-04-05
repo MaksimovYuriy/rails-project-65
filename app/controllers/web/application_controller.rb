@@ -10,7 +10,7 @@ class Web::ApplicationController < ApplicationController
 
     def authenticate_user!
         unless session[:user_id].present?
-            redirect_to root_path, alert: "Please log in to continue."
+            redirect_to root_path, alert: I18n.t('notices.application.not_authorized')
         end
     end
 
@@ -20,7 +20,7 @@ class Web::ApplicationController < ApplicationController
     private
 
     def user_not_authorized
-        redirect_to root_path, alert: 'There are no administrator rights.'
+        redirect_to root_path, alert: I18n.t('notices.application.no_admin_rights')
     end
 
 end
