@@ -8,6 +8,9 @@ Bundler.require(*Rails.groups)
 
 module RailsProject65
   class Application < Rails::Application
+    # config/application.rb
+    config.autoload_paths += %W(#{config.root}/app/policies)
+
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.2
 

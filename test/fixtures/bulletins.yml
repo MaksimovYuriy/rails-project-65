@@ -1,22 +1,15 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+bulletin1:
+  title: "First Bulletin"
+  description: "This is the first bulletin"
+  user: user
+  category: category1
+  aasm_state: "published"
 
-one:
-  title: 'Bulletin title 1'
-  description: 'Bulletin description 1'
-  user: one
-  category: one
-  image: test/fixtures/files/image.png
+bulletin2:
+  title: "Draft Bulletin"
+  description: "This is a draft bulletin"
+  user: user
+  category: category2
+  aasm_state: "draft"
 
-two:
-  title: 'Bulletin title 2'
-  description: 'Bulletin description 2'
-  user: two
-  category: two
-  image: test/fixtures/files/image.png
 
-three:
-  title: 'Bulletin title 3'
-  description: 'Bulletin description 3'
-  user: two
-  category: three
-  image: test/fixtures/files/image.png  

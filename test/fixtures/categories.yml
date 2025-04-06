@@ -1,10 +1,5 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+category1:
+  name: "General"
 
-one:
-  name: Construction
-
-two:
-  name: Entertainment
-
-three:
-  name: Technic
+category2:
+  name: "Announcements"
