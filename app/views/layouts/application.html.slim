@@ -26,10 +26,10 @@ html
 
       .container
         - flash.each do |type, message|
-          - bootstrap_class = types[type.to_sym] || "secondary"
+          - bootstrap_class = types[type.to_sym] || 'secondary'
           div class="alert alert-#{bootstrap_class} alert-dismissible fade show" role="alert"
-              = message
-          button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
+            = message
+            button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
 
       .container.mb-5
         = yield
