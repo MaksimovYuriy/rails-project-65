@@ -1,12 +1,12 @@
-- types = { success: "success", notice: "success",
-            alert: "danger", error: "danger",
-            warning: "warning", info: "info" }
+- types = { success: 'success', notice: 'success',
+            alert: 'danger', error: 'danger',
+            warning: 'warning', info: 'info' }
 
 doctype html
 html
   head
     title
-      = content_for(:title) || "Rails Project 65"
+      = content_for(:title) || 'Rails Project 65'
     meta[name="viewport" content="width=device-width,initial-scale=1"]
     meta[name="apple-mobile-web-app-capable" content="yes"]
     = csrf_meta_tags
@@ -16,17 +16,19 @@ html
     link[rel="icon" href="/icon.png" type="image/png"]
     link[rel="icon" href="/icon.svg" type="image/svg+xml"]
     link[rel="apple-touch-icon" href="/icon.png"]
-    = stylesheet_link_tag "application", "data-turbo-track": "reload"
-    = javascript_include_tag "application", "data-turbo-track": "reload",
-      type: "module"
+    = stylesheet_link_tag 'application', 'data-turbo-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbo-track': 'reload',
+      type: 'module'
+    - # rubocop:disable Rails/OutputSafety
     = Sentry.get_trace_propagation_meta.html_safe
+    - # rubocop:enable Rails/OutputSafety
   body
       div
-        = render partial: "layouts/shared/nav"
+        = render partial: 'layouts/shared/nav'
 
       .container
         - flash.each do |type, message|
-          - bootstrap_class = types[type.to_sym] || "secondary"
+          - bootstrap_class = types[type.to_sym] || 'secondary'
           div class="alert alert-#{bootstrap_class} alert-dismissible fade show" role="alert"
             = message
             button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
@@ -35,4 +37,4 @@ html
         = yield
 
       div
-        = render "layouts/shared/footer"
+        = render 'layouts/shared/footer'

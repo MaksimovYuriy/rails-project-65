@@ -36,6 +36,8 @@ en:
     bulletins:
       create: 'Bulletin was successfully created'
       update: 'Bulletin was successfully updated'
+      send_to_moderation: 'Bulletin sent to moderation'
+      faild_to_moderation: 'Failed to send bulletin to moderation'
     categories:
       create: 'Category was successfully created'
       update: 'Category was successfully updated'

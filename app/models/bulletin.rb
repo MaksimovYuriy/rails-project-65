@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class Bulletin < ApplicationRecord
   include AASM
 
-  aasm column: "state" do
+  aasm column: 'state' do
     state :draft, initial: true
     state :under_moderation
     state :rejected
@@ -21,12 +23,12 @@ class Bulletin < ApplicationRecord
     end
 
     event :archive do
-      transitions from: [ :draft, :under_moderation, :rejected, :published ], to: :archived
+      transitions from: %i[draft under_moderation rejected published], to: :archived
     end
   end
 
-  def self.ransackable_attributes(auth_object = nil)
-    [ "category_id", "title" ]
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[category_id title]
   end
 
   belongs_to :user
