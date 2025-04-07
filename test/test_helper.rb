@@ -40,7 +40,7 @@ class ActionDispatch::IntegrationTest
     @current_user ||= User.find_by(id: session[:user_id])
   end
 
-  def load_image(name, type = 'image/jpeg')
+  def load_image(name, type = "image/jpeg")
     image_path = Rails.root.join("test/fixtures/files/#{name}")
     fixture_file_upload(image_path, type)
   end

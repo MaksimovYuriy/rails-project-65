@@ -3,10 +3,10 @@ require "pundit"
 class Web::BulletinsControllerTest < ActionDispatch::IntegrationTest
     setup do
       @attrs = { category_id: categories(:category1)[:id],
-                description: 'test description',
-                title: 'test title',
+                description: "test description",
+                title: "test title",
                 user: users(:user),
-                image: load_image('image.jpeg') }
+                image: load_image("image.jpeg") }
       @bulletin = Bulletin.create!(@attrs)
     end
 
@@ -37,26 +37,26 @@ class Web::BulletinsControllerTest < ActionDispatch::IntegrationTest
       sign_in users(:user)
 
       attrs_without_image = { category_id: categories(:category2)[:id],
-                description: 'test description',
-                title: 'test title' }
-      
+                description: "test description",
+                title: "test title" }
+
       post bulletins_url, params: { bulletin: attrs_without_image }
 
       bulletin = Bulletin.find_by attrs_without_image
-      assert { bulletin.nil? }    
+      assert { bulletin.nil? }
     end
 
     test "update bulletin" do
       sign_in users(:user)
       updated_attrs = {
-        title: 'updated title'
+        title: "updated title"
       }
 
       patch bulletin_path(@bulletin), params: { bulletin: updated_attrs }
       assert_redirected_to bulletin_path(@bulletin)
 
       @bulletin.reload
-      assert_equal @bulletin.title, 'updated title'
+      assert_equal @bulletin.title, "updated title"
     end
 
     test "bulletin states (admin == false)" do
@@ -64,13 +64,13 @@ class Web::BulletinsControllerTest < ActionDispatch::IntegrationTest
 
       patch to_moderate_bulletin_path(@bulletin), params: {}
       assert_response :redirect
-      assert_equal 'under_moderation', @bulletin.reload.aasm_state
+      assert_equal "under_moderation", @bulletin.reload.aasm_state
 
       patch publish_admin_bulletin_path(@bulletin), params: {}
-      assert_equal 'under_moderation', @bulletin.reload.aasm_state
+      assert_equal "under_moderation", @bulletin.reload.aasm_state
 
       patch archive_bulletin_path(@bulletin), params: {}
       assert_response :redirect
-      assert_equal 'archived', @bulletin.reload.aasm_state
+      assert_equal "archived", @bulletin.reload.aasm_state
     end
 end
