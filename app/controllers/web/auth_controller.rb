@@ -1,7 +1,7 @@
 module Web
     class AuthController < Web::ApplicationController
         def callback
-            auth = request.env['omniauth.auth']
+            auth = request.env["omniauth.auth"]
             user = User.find_or_create_by(email: auth.info.email) do |u|
                 u.name = auth.info.name
             end
@@ -13,8 +13,7 @@ module Web
         def logout
             session[:user_id] = nil
             session[:user_admin] = nil
-            redirect_to root_path, notice: I18n.t('notices.auth.logout')
+            redirect_to root_path, notice: I18n.t("notices.auth.logout")
         end
-
     end
 end

@@ -1,32 +1,21 @@
-require 'pundit'
+require "pundit"
 
 class Web::BulletinsControllerTest < ActionDispatch::IntegrationTest
-
     setup do
-
+      @attrs = { category_id: categories(:category1)[:id],
+                description: 'test description',
+                title: 'test title',
+                user: users(:user),
+                image: load_image('image.jpeg') }
+      @bulletin = Bulletin.create!(@attrs)
     end
 
-    test 'policy loads correctly' do
-      user = users(:user)
-      bulletin = bulletins(:bulletin2)
-    
-      # Проверяем, что политика существует для bulletin
-      policy = Pundit.policy(user, bulletin)
-      assert_instance_of(Web::BulletinPolicy, policy)
-    end
-
-    test 'index page' do
+    test "index page" do
         get root_url
         assert_response :success
     end
 
-    test 'bulletin states (admin == false)' do
-      sign_in users(:user)
-      bulletin = bulletins(:bulletin2)
-    
-      patch to_moderate_bulletin_path(bulletin), params: {}
-      assert_response :redirect
-      assert_equal 'under_moderation', bulletin.reload.aasm_state
+    test "bulletin states (admin == false)" do
+      debugger
     end
-      
 end

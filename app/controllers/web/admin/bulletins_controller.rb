@@ -16,12 +16,12 @@ module Web
             def on_moderate
                 @search_query = Bulletin.ransack(params[:search_query])
                 @bulletins = @search_query.result
-                    .where(aasm_state: 'under_moderation')
+                    .where(aasm_state: "under_moderation")
                     .order(created_at: :desc)
                     .page(params[:page])
                 @bulletins.each do |bulletin|
                     authorize bulletin, policy_class: Web::Admin::BulletinPolicy
-                end              
+                end
             end
 
             def to_moderate
@@ -33,7 +33,7 @@ module Web
             def reject
                 @bulletin = Bulletin.find(params[:id])
                 @bulletin.reject!
-                redirect_to admin_bulletins_path                
+                redirect_to admin_bulletins_path
             end
 
             def publish
@@ -47,7 +47,6 @@ module Web
                 @bulletin.archive!
                 redirect_to admin_bulletins_path
             end
-
         end
     end
 end

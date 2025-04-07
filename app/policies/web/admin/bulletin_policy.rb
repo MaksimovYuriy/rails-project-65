@@ -1,7 +1,6 @@
 module Web
     module Admin
         class BulletinPolicy < ApplicationPolicy
-
             def index?
                 user&.admin?
             end
@@ -49,7 +48,6 @@ module Web
             def archive?
                 user&.admin?
             end
-
         end
     end
 end

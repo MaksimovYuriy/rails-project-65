@@ -7,25 +7,25 @@ gem "sentry-rails"
 
 gem "erb2slim"
 
-gem 'omniauth-github'
-gem 'omniauth-rails_csrf_protection'
+gem "omniauth-github"
+gem "omniauth-rails_csrf_protection"
 
-gem 'faker'
+gem "faker"
 
-gem 'simple_form'
+gem "simple_form"
 
-gem 'active_storage_validations'
-gem 'aws-sdk-s3'
-gem 'file_validators'
-gem 'image_processing'
+gem "active_storage_validations"
+gem "aws-sdk-s3"
+gem "file_validators"
+gem "image_processing"
 
-gem 'pundit'
-gem 'aasm'
+gem "pundit"
+gem "aasm"
 
-gem 'ransack', :github => 'activerecord-hackery/ransack', :branch => 'main'
-gem 'kaminari'
+gem "ransack", github: "activerecord-hackery/ransack", branch: "main"
+gem "kaminari"
 
-gem 'minitest-power_assert'
+gem "minitest-power_assert"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.2.2", ">= 7.2.2.1"
@@ -62,8 +62,8 @@ gem "bootsnap", require: false
 # gem "image_processing", "~> 1.2"
 
 group :development, :test do
-  gem 'dotenv-rails'
-  gem 'dotenv'
+  gem "dotenv-rails"
+  gem "dotenv"
   # Use sqlite3 as the database for Active Record
   gem "sqlite3", ">= 1.4"
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -88,5 +88,5 @@ group :test do
 end
 
 group :production do
-  gem 'pg'
+  gem "pg"
 end

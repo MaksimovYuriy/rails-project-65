@@ -1,5 +1,4 @@
 class Bulletin < ApplicationRecord
-
   include AASM
 
   aasm do
@@ -22,12 +21,12 @@ class Bulletin < ApplicationRecord
     end
 
     event :archive do
-      transitions from: [:draft, :under_moderation, :rejected, :published], to: :archived
+      transitions from: [ :draft, :under_moderation, :rejected, :published ], to: :archived
     end
   end
 
   def self.ransackable_attributes(auth_object = nil)
-    ["category_id", "title"]
+    [ "category_id", "title" ]
   end
 
   belongs_to :user
@@ -41,7 +40,7 @@ class Bulletin < ApplicationRecord
   validates :description, presence: true
   validates :description, length: { minimum: 5, maximum: 1000 }
 
-  validates :image, 
+  validates :image,
             attached: true,
             content_type: %i[png jpg jpeg],
             size: { less_than: 5.megabytes }

@@ -1,6 +1,5 @@
 module Web
     class BulletinPolicy < ApplicationPolicy
-
         def index?
             true
         end
@@ -26,12 +25,12 @@ module Web
         end
 
         def destroy?
-            user&.admin? || record.user_id == user.id 
+            user&.admin? || record.user_id == user.id
         end
 
         def profile?
             record.user_id == user.id
-        end 
+        end
 
         def to_moderate?
             record.user_id == user.id
@@ -48,6 +47,5 @@ module Web
         def publish?
             user&.admin?
         end
-
     end
 end

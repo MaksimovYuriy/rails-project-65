@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
-  root to: 'web/bulletins#index'
+  root to: "web/bulletins#index"
 
   scope module: :web do
-    post 'auth/:provider', to: 'auth#request', as: :auth_request
-    get 'auth/:provider/callback', to: 'auth#callback', as: :callback_auth
-    delete 'logout', to: 'auth#logout', as: :auth_logout
+    post "auth/:provider", to: "auth#request", as: :auth_request
+    get "auth/:provider/callback", to: "auth#callback", as: :callback_auth
+    delete "logout", to: "auth#logout", as: :auth_logout
 
     resources :bulletins, except: %i[destroy] do
       collection do
@@ -13,18 +13,17 @@ Rails.application.routes.draw do
       member do
         patch :to_moderate
         patch :archive
-      end        
+      end
     end
 
-    resource :profile, only: [:show], controller: 'bulletins', action: 'profile'
-  
+    resource :profile, only: [ :show ], controller: "bulletins", action: "profile"
+
 
     scope module: :admin do
+      get "/admin", to: "bulletins#on_moderate", as: "admin"
 
-      get '/admin', to: 'bulletins#on_moderate', as: 'admin'
-
-      resources :categories, except: %i[show], path: '/admin/categories', as: 'admin_categories'
-      resources :bulletins, only: %i[index], path: '/admin/bulletins', as: 'admin_bulletins' do
+      resources :categories, except: %i[show], path: "/admin/categories", as: "admin_categories"
+      resources :bulletins, only: %i[index], path: "/admin/bulletins", as: "admin_bulletins" do
         member do
           patch :to_moderate
           patch :reject

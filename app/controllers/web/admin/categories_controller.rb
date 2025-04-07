@@ -18,7 +18,7 @@ module Web
                 @category = Category.new(category_params)
 
                 if @category.save
-                    redirect_to admin_categories_path, notice: I18n.t('notices.categories.create')
+                    redirect_to admin_categories_path, notice: I18n.t("notices.categories.create")
                 else
                     render :new, status: :unprocessable_entity
                 end
@@ -34,7 +34,7 @@ module Web
                 authorize @category, policy_class: Web::Admin::CategoryPolicy
 
                 if @category.update(category_params)
-                    redirect_to admin_categories_path, notice: I18n.t('notices.categories.update')
+                    redirect_to admin_categories_path, notice: I18n.t("notices.categories.update")
                 else
                     render :edit, status: :unprocessable_entity
                 end
@@ -44,15 +44,14 @@ module Web
                 @category = Category.find(params[:id])
                 authorize @category, policy_class: Web::Admin::CategoryPolicy
                 @category&.destroy!
-                redirect_to admin_categories_path, notice: I18n.t('notices.categories.destroy')
+                redirect_to admin_categories_path, notice: I18n.t("notices.categories.destroy")
             end
 
-            private 
-            
+            private
+
             def category_params
                 params.require(:category).permit(:name)
             end
-
         end
     end
 end

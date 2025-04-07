@@ -1,7 +1,6 @@
 module Web
     module Admin
         class CategoryPolicy < ApplicationPolicy
-
             def index?
                 user&.admin?
             end
@@ -29,7 +28,6 @@ module Web
             def destroy?
                 user&.admin?
             end
-
         end
     end
 end
