@@ -3,13 +3,13 @@ bulletin1:
   description: "This is the first bulletin"
   user: user
   category: category1
-  aasm_state: "published"
+  state: "published"
 
 bulletin2:
   title: "Draft Bulletin"
   description: "This is a draft bulletin"
   user: user
   category: category2
-  aasm_state: "draft"
+  state: "draft"
 
 

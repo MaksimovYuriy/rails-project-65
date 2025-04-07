@@ -25,15 +25,15 @@ class Web::Admin::BulletinsControllerTest < ActionDispatch::IntegrationTest
 
         patch to_moderate_admin_bulletin_path(@bulletin), params: {}
         assert_response :redirect
-        assert_equal "under_moderation", @bulletin.reload.aasm_state
+        assert_equal "under_moderation", @bulletin.reload.state
 
         patch publish_admin_bulletin_path(@bulletin), params: {}
         assert_response :redirect
-        assert_equal "published", @bulletin.reload.aasm_state
+        assert_equal "published", @bulletin.reload.state
 
         patch archive_admin_bulletin_path(@bulletin), params: {}
         assert_response :redirect
-        assert_equal "archived", @bulletin.reload.aasm_state
+        assert_equal "archived", @bulletin.reload.state
     end
 
     test "bulletin states (admin == true) - reject" do
@@ -41,11 +41,11 @@ class Web::Admin::BulletinsControllerTest < ActionDispatch::IntegrationTest
 
         patch to_moderate_admin_bulletin_path(@bulletin), params: {}
         assert_response :redirect
-        assert_equal "under_moderation", @bulletin.reload.aasm_state
+        assert_equal "under_moderation", @bulletin.reload.state
 
         patch reject_admin_bulletin_path(@bulletin), params: {}
         assert_response :redirect
-        assert_equal "rejected", @bulletin.reload.aasm_state
+        assert_equal "rejected", @bulletin.reload.state
 
         assert_raises AASM::InvalidTransition do
           patch publish_admin_bulletin_path(@bulletin), params: {}
@@ -53,6 +53,6 @@ class Web::Admin::BulletinsControllerTest < ActionDispatch::IntegrationTest
 
         patch archive_admin_bulletin_path(@bulletin), params: {}
         assert_response :redirect
-        assert_equal "archived", @bulletin.reload.aasm_state
+        assert_equal "archived", @bulletin.reload.state
     end
 end

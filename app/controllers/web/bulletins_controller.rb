@@ -5,7 +5,7 @@ module Web
         def index
             @search_query = Bulletin.ransack(params[:search_query])
             @bulletins = @search_query.result
-                .where(aasm_state: "published")
+                .where(state: "published")
                 .order(created_at: :desc)
                 .page(params[:page])
             authorize @bulletins, policy_class: Web::BulletinPolicy

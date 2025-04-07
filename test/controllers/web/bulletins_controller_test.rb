@@ -64,13 +64,13 @@ class Web::BulletinsControllerTest < ActionDispatch::IntegrationTest
 
       patch to_moderate_bulletin_path(@bulletin), params: {}
       assert_response :redirect
-      assert_equal "under_moderation", @bulletin.reload.aasm_state
+      assert_equal "under_moderation", @bulletin.reload.state
 
       patch publish_admin_bulletin_path(@bulletin), params: {}
-      assert_equal "under_moderation", @bulletin.reload.aasm_state
+      assert_equal "under_moderation", @bulletin.reload.state
 
       patch archive_bulletin_path(@bulletin), params: {}
       assert_response :redirect
-      assert_equal "archived", @bulletin.reload.aasm_state
+      assert_equal "archived", @bulletin.reload.state
     end
 end

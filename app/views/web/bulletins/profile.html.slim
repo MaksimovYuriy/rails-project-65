@@ -17,7 +17,7 @@ table.table
       tr
         td = bulletin.id
         td = link_to bulletin.title, bulletin_path(bulletin)
-        td = bulletin.aasm_state
+        td = bulletin.state
         td.actions
           = link_to t('actions.show'), bulletin_path(bulletin), class: 'me-2'
           = link_to t('actions.edit'), edit_bulletin_path(bulletin), class: 'me-2'
