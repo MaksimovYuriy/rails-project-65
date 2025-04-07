@@ -1,7 +1,6 @@
-require 'application_system_test_case'
+require "application_system_test_case"
 
 class BulletinsTest < ApplicationSystemTestCase
-
     setup do
         sign_in users(:user)
     end
@@ -9,5 +8,4 @@ class BulletinsTest < ApplicationSystemTestCase
     test "test" do
        debugger
     end
-
 end
