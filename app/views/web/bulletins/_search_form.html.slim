@@ -1,13 +1,16 @@
 .x-search-form
   = search_form_for @search_query, url: do |f|
-    .x-search-group
-      = f.label :title_cont, t('search.title'), class: 'x-search-label'
-      = f.search_field :title_cont, class: 'x-search-input'
+    .x-search-row
+      .x-search-item
+        = f.search_field :title_cont, class: 'x-search-input',
+          placeholder: t('search.title'), label: t('search.category')
+      
+      .x-search-item
+        = f.collection_select :category_id_eq, Category.all, :id, :name, { include_blank: 'Все категории' }, 
+          class: 'x-search-select', placeholder: t('search.category'), label: t('search.category')
 
-    .x-search-group
-      = f.label :category_id_eq, t('search.category'), class: 'x-search-label'
-      = f.collection_select :category_id_eq, Category.all, :id, :name, { include_blank: 'Все категории' }, class: 'x-search-select'
-
-    .x-search-actions.mt-3
-      = f.submit t('search.find'), class: 'x-search-btn'
-      = link_to t('search.reset'), url, class: 'x-search-reset'
+      .x-search-item
+        = f.submit t('search.find'), class: 'x-search-btn'
+      
+      .x-search-item
+        = link_to t('search.reset'), url, class: 'x-search-reset'

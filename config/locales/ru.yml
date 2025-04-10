@@ -1,0 +1,57 @@
+ru:
+  language: 'Русский язык'
+  attributes:
+    id: 'ID'
+    title: 'Название'
+    state: 'Статус'
+    actions: 'Действия'
+  actions:
+    show: 'Просмотр'
+    edit: 'Редактировать'
+    destroy: 'Удалить'
+    to_moderate: 'На модерацию'
+    archive: 'Архивировать'
+    reject: 'Отклонить'
+    to_publish: 'Опубликовать'
+  confirmation: 'Вы уверены?'
+  titles:
+    all_bulletins: 'Все объявления'
+    my_bulletins: 'Мои объявления'
+    bulletins: 'Объявления'
+    categories: 'Категории'
+    search: 'Поиск'
+    bulletins_on_moderation: 'Объявления на модерации'
+  links:
+    create_bulletin: 'Создать объявление'
+    create_category: 'Создать категорию'
+    home: 'Главная'
+    profile: 'Профиль'
+    new_bulletin: 'Новое объявление'
+    admin: 'Админ-панель'
+    login_github: 'Вход (GitHub)'
+    logout: 'Выход'
+  notices:
+    application:
+      not_authorized: 'Пожалуйста, авторизируйтесь, чтобы продолжить'
+      no_admin_rights: 'Отсутствуют права администратора'
+    bulletins:
+      create: 'Объявление успешно создано'
+      update: 'Объявление успешно обновлено'
+      send_to_moderation: 'Объявление отправлено на модерацию'
+      faild_to_moderation: 'Ошибка при отправке на модерацию'
+    categories:
+      create: 'Категория успешно создана'
+      update: 'Категория успешно обновлена'
+      destroy: 'Категория успешно удалена'
+    auth:
+      logged: 'Выполнен вход как'
+      logout: 'Выполнен выход'
+  views:
+    published_by: 'Опубликовано'
+  search:
+    title: 'Название'
+    category: 'Категория'
+    find: 'Найти'
+    reset: 'Сбросить'
+  footer:
+    github: 'github.com/MaksimovYuriy'
