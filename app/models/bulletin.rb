@@ -1,14 +1,25 @@
 # frozen_string_literal: true
 
 class Bulletin < ApplicationRecord
+
+  belongs_to :user
+  belongs_to :category
+  has_one_attached :image
+
+  validates :title, presence: true, length: { minimum: 3, maximum: 50 }
+
+  validates :description, presence: true, length: { minimum: 5, maximum: 1000 }
+
+  validates :image,
+            attached: true,
+            content_type: %i[png jpg jpeg],
+            size: { less_than: 5.megabytes }
+
   include AASM
 
   aasm column: 'state' do
     state :draft, initial: true
-    state :under_moderation
-    state :rejected
-    state :published
-    state :archived
+    state :under_moderation, :rejected, :published, :archived
 
     event :to_moderate do
       transitions from: :draft, to: :under_moderation
@@ -30,20 +41,4 @@ class Bulletin < ApplicationRecord
   def self.ransackable_attributes(_auth_object = nil)
     %w[category_id title]
   end
-
-  belongs_to :user
-  belongs_to :category
-
-  has_one_attached :image
-
-  validates :title, presence: true
-  validates :title, length: { minimum: 3, maximum: 50 }
-
-  validates :description, presence: true
-  validates :description, length: { minimum: 5, maximum: 1000 }
-
-  validates :image,
-            attached: true,
-            content_type: %i[png jpg jpeg],
-            size: { less_than: 5.megabytes }
 end
