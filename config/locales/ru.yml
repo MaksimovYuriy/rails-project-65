@@ -46,6 +46,7 @@ ru:
     auth:
       logged: 'Выполнен вход как'
       logout: 'Выполнен выход'
+      failure: 'Ошибка при входе'
   views:
     published_by: 'Опубликовано'
   search:

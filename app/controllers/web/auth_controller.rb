@@ -17,5 +17,11 @@ module Web
       session[:user_admin] = nil
       redirect_to root_path, notice: I18n.t('notices.auth.logout')
     end
+
+    def failure
+      session[:user_id] = nil
+      session[:user_admin] = nil
+      redirect_to root_path, notice: I18n.t('notices.auth.failure')      
+    end
   end
 end

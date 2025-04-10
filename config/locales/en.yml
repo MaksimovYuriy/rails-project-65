@@ -46,6 +46,7 @@ en:
     auth:
       logged: 'You logged like'
       logout: 'You logout'
+      failure: 'Login failed'
   views:
     published_by: 'Published by'
   search:
