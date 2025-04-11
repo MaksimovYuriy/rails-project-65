@@ -4,13 +4,13 @@
       .x-search-item
         = f.search_field :title_cont, class: 'x-search-input',
           placeholder: t('search.title'), label: t('search.category')
-      
+
       .x-search-item
-        = f.collection_select :category_id_eq, Category.all, :id, :name, { include_blank: 'Все категории' }, 
+        = f.collection_select :category_id_eq, Category.all, :id, :name, { include_blank: 'Все категории' },
           class: 'x-search-select', placeholder: t('search.category'), label: t('search.category')
 
       .x-search-button
         = f.submit t('search.find'), class: 'x-search-btn'
-      
+
       .x-search-button
         = link_to t('search.reset'), url, class: 'x-search-reset'
