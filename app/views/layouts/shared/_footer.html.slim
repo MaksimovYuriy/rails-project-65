@@ -5,6 +5,6 @@ footer.fixed-bottom.py-1.p-0.bg-dark.text-light
                 = t('footer.github')
             p.mb-0.mr-auto
                 - if I18n.locale == :ru
-                    = link_to t('language'), url_for(locale: 'en')
+                    = link_to t('languages.en'), url_for(locale: 'en')
                 - else
-                    = link_to t('language'), url_for(locale: 'ru')
+                    = link_to t('languages.ru'), url_for(locale: 'ru')

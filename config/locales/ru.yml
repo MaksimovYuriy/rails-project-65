@@ -1,5 +1,7 @@
 ru:
-  language: 'Русский язык'
+  languages:
+    ru: 'Русский язык'
+    en: 'English'
   attributes:
     id: 'ID'
     title: 'Название'

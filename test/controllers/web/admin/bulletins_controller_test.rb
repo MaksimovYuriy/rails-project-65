@@ -13,7 +13,7 @@ class Web::Admin::BulletinsControllerTest < ActionDispatch::IntegrationTest
   test 'admin page (user.admin == false)' do
     sign_in users(:user)
     get admin_path
-    assert_redirected_to root_path
+    assert_redirected_to root_path(locale: I18n.default_locale)
   end
 
   test 'admin page (user.admin == true)' do

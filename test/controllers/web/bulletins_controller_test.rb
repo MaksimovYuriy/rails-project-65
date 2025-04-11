@@ -19,7 +19,7 @@ class Web::BulletinsControllerTest < ActionDispatch::IntegrationTest
 
   test 'profile page' do
     get profile_path
-    assert_redirected_to root_path
+    assert_redirected_to root_path(locale: I18n.default_locale)
 
     sign_in users(:user)
     get profile_path
@@ -28,7 +28,7 @@ class Web::BulletinsControllerTest < ActionDispatch::IntegrationTest
 
   test 'new bulletin page' do
     get new_bulletin_path
-    assert_redirected_to root_path
+    assert_redirected_to root_path(locale: I18n.default_locale)
 
     sign_in users(:user)
     get new_bulletin_path
@@ -55,7 +55,7 @@ class Web::BulletinsControllerTest < ActionDispatch::IntegrationTest
     }
 
     patch bulletin_path(@bulletin), params: { bulletin: updated_attrs }
-    assert_redirected_to bulletin_path(@bulletin)
+    assert_redirected_to bulletin_path(@bulletin, locale: I18n.default_locale)
 
     @bulletin.reload
     assert_equal @bulletin.title, 'updated title'

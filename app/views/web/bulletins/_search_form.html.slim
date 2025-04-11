@@ -9,8 +9,8 @@
         = f.collection_select :category_id_eq, Category.all, :id, :name, { include_blank: 'Все категории' }, 
           class: 'x-search-select', placeholder: t('search.category'), label: t('search.category')
 
-      .x-search-item
+      .x-search-button
         = f.submit t('search.find'), class: 'x-search-btn'
       
-      .x-search-item
+      .x-search-button
         = link_to t('search.reset'), url, class: 'x-search-reset'

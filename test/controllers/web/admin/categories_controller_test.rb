@@ -20,7 +20,7 @@ class Web::Admin::CategoriesControllerTest < ActionDispatch::IntegrationTest
       name: 'Updated'
     }
     patch admin_category_path(category), params: { category: updated_attrs }
-    assert_redirected_to admin_categories_path
+    assert_redirected_to admin_categories_path(locale: I18n.default_locale)
 
     category.reload
     assert_equal category.name, 'Updated'
