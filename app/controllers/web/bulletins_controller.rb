@@ -13,18 +13,8 @@ module Web
       authorize @bulletins, policy_class: Web::BulletinPolicy
     end
 
-    def show
-      @bulletin = Bulletin.find(params[:id])
-      authorize @bulletin, policy_class: Web::BulletinPolicy
-    end
-
     def new
       @bulletin = current_user.bulletins.build
-      authorize @bulletin, policy_class: Web::BulletinPolicy
-    end
-
-    def edit
-      @bulletin = Bulletin.find(params[:id])
       authorize @bulletin, policy_class: Web::BulletinPolicy
     end
 
@@ -37,6 +27,16 @@ module Web
       else
         render :new, status: :unprocessable_entity
       end
+    end
+
+    def show
+      @bulletin = Bulletin.find(params[:id])
+      authorize @bulletin, policy_class: Web::BulletinPolicy
+    end
+
+    def edit
+      @bulletin = Bulletin.find(params[:id])
+      authorize @bulletin, policy_class: Web::BulletinPolicy
     end
 
     def update
