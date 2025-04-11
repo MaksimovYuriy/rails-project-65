@@ -15,10 +15,6 @@ module Web
         user&.admin?
       end
 
-      def show?
-        user&.admin?
-      end
-
       def edit?
         user&.admin?
       end

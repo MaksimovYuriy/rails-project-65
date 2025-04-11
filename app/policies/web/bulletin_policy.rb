@@ -26,10 +26,6 @@ module Web
       record.user_id == user.id
     end
 
-    def destroy?
-      user&.admin? || record.user_id == user.id
-    end
-
     def profile?
       record.user_id == user.id
     end
@@ -40,14 +36,6 @@ module Web
 
     def archive?
       record.user_id == user.id
-    end
-
-    def reject?
-      user&.admin?
-    end
-
-    def publish?
-      user&.admin?
     end
   end
 end
