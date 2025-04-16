@@ -4,7 +4,7 @@ module Web
   module Admin
     class BulletinsController < Web::Admin::ApplicationController
       before_action :authorize_admin!
-      
+
       def index
         @search_query = Bulletin.ransack(params[:search_query])
         @bulletins = @search_query.result

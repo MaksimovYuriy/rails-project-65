@@ -1,0 +1,31 @@
+h1
+    = t('titles.profile')
+h3
+    = link_to t('links.create_bulletin'), new_bulletin_path
+
+== render 'web/bulletins/search_form', url: profile_index_path
+
+table.table
+  thead
+    tr
+      th = t('attributes.id')
+      th = t('attributes.title')
+      th = t('attributes.state')
+      th = t('attributes.actions')
+  tbody
+    - @bulletins.each do |bulletin|
+      tr
+        td = bulletin.id
+        td = link_to bulletin.title, bulletin_path(bulletin)
+        td = bulletin.state
+        td.actions
+          = link_to t('actions.show'), bulletin_path(bulletin), class: 'me-2'
+          = link_to t('actions.edit'), edit_bulletin_path(bulletin), class: 'me-2'
+          - if bulletin.may_to_moderate?
+            = link_to t('actions.to_moderate'), to_moderate_bulletin_path(bulletin), data: { 'turbo-method' => :patch,
+              'turbo-confirm' => t('confirmation') }, class: 'me-2'
+          - if bulletin.may_archive?
+            = link_to t('actions.archive'), archive_bulletin_path(bulletin), data: { 'turbo-method' => :patch,
+              'turbo-confirm' => t('confirmation') }, class: 'me-2 btn btn-danger'
+
+= paginate @bulletins

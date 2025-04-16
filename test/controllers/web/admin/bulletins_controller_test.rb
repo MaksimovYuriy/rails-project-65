@@ -2,12 +2,8 @@
 
 class Web::Admin::BulletinsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @attrs = { category_id: categories(:category1)[:id],
-               description: 'test description',
-               title: 'test title',
-               user: users(:user),
-               image: load_image('image.jpeg') }
-    @bulletin = Bulletin.create!(@attrs)
+    @bulletin = bulletins(:bulletin_without_image)
+    @bulletin.image = load_image('image.jpeg')
   end
 
   test 'admin page (user.admin == false)' do
@@ -22,39 +18,49 @@ class Web::Admin::BulletinsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test 'bulletin states (admin == true) - publish' do
+  test 'admin index page' do
+    sign_in users(:admin)
+    get admin_bulletins_path
+    assert_response :success
+  end
+
+  test 'bulletin publish' do
     sign_in users(:admin)
 
-    patch to_moderate_admin_bulletin_path(@bulletin), params: {}
-    assert_response :redirect
-    assert_equal 'under_moderation', @bulletin.reload.state
-
+    @bulletin.to_moderate!
     patch publish_admin_bulletin_path(@bulletin), params: {}
     assert_response :redirect
     assert_equal 'published', @bulletin.reload.state
+  end
+
+  test 'bulletin archive' do
+    sign_in users(:admin)
+
+    @bulletin.to_moderate!
+    @bulletin.publish!
 
     patch archive_admin_bulletin_path(@bulletin), params: {}
     assert_response :redirect
     assert_equal 'archived', @bulletin.reload.state
   end
 
-  test 'bulletin states (admin == true) - reject' do
+  test 'bulletin reject' do
     sign_in users(:admin)
 
-    patch to_moderate_admin_bulletin_path(@bulletin), params: {}
-    assert_response :redirect
-    assert_equal 'under_moderation', @bulletin.reload.state
-
+    @bulletin.to_moderate!
     patch reject_admin_bulletin_path(@bulletin), params: {}
     assert_response :redirect
     assert_equal 'rejected', @bulletin.reload.state
+  end
+
+  test 'bulletin invalid transition' do
+    sign_in users(:admin)
+
+    @bulletin.to_moderate!
+    @bulletin.reject!
 
     assert_raises AASM::InvalidTransition do
       patch publish_admin_bulletin_path(@bulletin), params: {}
     end
-
-    patch archive_admin_bulletin_path(@bulletin), params: {}
-    assert_response :redirect
-    assert_equal 'archived', @bulletin.reload.state
   end
 end

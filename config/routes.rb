@@ -16,7 +16,7 @@ Rails.application.routes.draw do
       end
     end
 
-    resource :profile, only: [:show], controller: 'bulletins', action: 'profile'
+    resources :profile, only: [:index]
 
     namespace :admin do
       root to: 'bulletins#on_moderate'

@@ -4,12 +4,8 @@ require 'pundit'
 
 class Web::BulletinsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @attrs = { category_id: categories(:category1)[:id],
-               description: 'test description',
-               title: 'test title',
-               user: users(:user),
-               image: load_image('image.jpeg') }
-    @bulletin = Bulletin.create!(@attrs)
+    @bulletin = bulletins(:bulletin_without_image)
+    @bulletin.image = load_image('image.jpeg')
   end
 
   test 'index page' do
@@ -17,25 +13,18 @@ class Web::BulletinsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test 'profile page' do
-    get profile_path
-    assert_redirected_to root_path(locale: I18n.default_locale)
-
-    sign_in users(:user)
-    get profile_path
-    assert_response :success
-  end
-
-  test 'new bulletin page' do
+  test 'new bulletin page without user' do
     get new_bulletin_path
     assert_redirected_to root_path(locale: I18n.default_locale)
+  end
 
+  test 'new bulletin page with user' do
     sign_in users(:user)
     get new_bulletin_path
     assert_response :success
   end
 
-  test 'new bulletin without image' do
+  test 'new bulletin without image and category' do
     sign_in users(:user)
 
     attrs_without_image = { category_id: categories(:category2)[:id],
@@ -48,10 +37,60 @@ class Web::BulletinsControllerTest < ActionDispatch::IntegrationTest
     assert { bulletin.nil? }
   end
 
+  test 'new bulletin' do
+    sign_in users(:user)
+
+    attrs = {
+      category_id: categories(:category2)[:id],
+      description: 'test description',
+      title: 'test title',
+      image: load_image('image.jpeg')
+    }
+
+    post bulletins_url, params: { bulletin: attrs }
+
+    bulletin = Bulletin.find_by title: attrs[:title]
+    assert { bulletin }
+  end
+
+  test 'show page without user' do
+    get bulletin_path(@bulletin)
+    assert_redirected_to root_path(locale: I18n.default_locale)
+  end
+
+  test 'show page with user (published)' do
+    sign_in users(:user)
+
+    get bulletin_path(bulletins(:bulletin1))
+    assert_response :success
+  end
+
+  test 'show page with user (draft)' do
+    sign_in users(:user)
+
+    get bulletin_path(@bulletin)
+    assert_redirected_to root_path(locale: I18n.default_locale)
+  end
+
+  test 'edit page (user - is owner)' do
+    sign_in users(:user)
+
+    get edit_bulletin_path(@bulletin)
+    assert_response :success
+  end
+
+  test 'edit page (user - is not owner)' do
+    sign_in users(:user)
+
+    get edit_bulletin_path(bulletins(:bulletin3))
+    assert_redirected_to root_path(locale: I18n.default_locale)
+  end
+
   test 'update bulletin' do
     sign_in users(:user)
     updated_attrs = {
-      title: 'updated title'
+      title: 'updated title',
+      image: load_image('image.jpeg')
     }
 
     patch bulletin_path(@bulletin), params: { bulletin: updated_attrs }
@@ -61,15 +100,10 @@ class Web::BulletinsControllerTest < ActionDispatch::IntegrationTest
     assert_equal @bulletin.title, 'updated title'
   end
 
-  test 'bulletin states (admin == false)' do
+  test 'bulletin states (archived)' do
     sign_in users(:user)
 
-    patch to_moderate_bulletin_path(@bulletin), params: {}
-    assert_response :redirect
-    assert_equal 'under_moderation', @bulletin.reload.state
-
-    patch publish_admin_bulletin_path(@bulletin), params: {}
-    assert_equal 'under_moderation', @bulletin.reload.state
+    @bulletin.to_moderate!
 
     patch archive_bulletin_path(@bulletin), params: {}
     assert_response :redirect

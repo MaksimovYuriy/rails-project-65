@@ -12,4 +12,20 @@ bulletin2:
   category: category2
   state: "draft"
 
+bulletin3:
+  title: "Draft Bulletin"
+  description: "This is a draft bulletin"
+  user: admin
+  category: category2
+  state: "draft"
+
+bulletin_without_image:
+  title: 'test title'
+  description: 'test description'
+  category: category1
+  user: user
+  state: 'draft'
+
+
+
 

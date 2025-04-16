@@ -5,13 +5,28 @@ class Web::Admin::CategoriesControllerTest < ActionDispatch::IntegrationTest
     sign_in users(:admin)
   end
 
-  test 'new category' do
+  test 'categories admin page' do
+    get admin_categories_path
+    assert_response :success
+  end
+
+  test 'new category page' do
+    get new_admin_category_path
+    assert_response :success
+  end
+
+  test 'create category' do
     attrs = {
       name: 'test category'
     }
     post admin_categories_path, params: { category: attrs }
     category = Category.find_by attrs
-    assert_equal category.name, 'test category'
+    assert { category }
+  end
+
+  test 'edit category page' do
+    get edit_admin_category_path(categories(:category1))
+    assert_response :success
   end
 
   test 'update category' do
@@ -30,6 +45,13 @@ class Web::Admin::CategoriesControllerTest < ActionDispatch::IntegrationTest
     category = categories(:category1)
     category_name = category.name
     delete admin_category_path(category)
+    category = Category.find_by name: category_name
+    assert { category }
+  end
+
+  test 'destroy category (without bulletins)' do
+    category_name = categories(:category_without_bulletins)[:name]
+    delete admin_category_path(categories(:category_without_bulletins))
     category = Category.find_by name: category_name
     assert { category }
   end

@@ -30,3 +30,7 @@ module TestHelpers
     fixture_file_upload(image_path, type)
   end
 end
+
+class ActiveSupport::TestCase
+  include TestHelpers
+end

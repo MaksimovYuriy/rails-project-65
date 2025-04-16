@@ -57,7 +57,7 @@ module Web
     def to_moderate
       @bulletin = Bulletin.find(params[:id])
       authorize @bulletin, :to_moderate?, policy_class: Web::BulletinPolicy
-      begin 
+      begin
         @bulletin.to_moderate!
         redirect_to profile_path, notice: I18n.t('notices.bulletins.send_to_moderation')
       rescue AASM::InvalidTransition
@@ -69,7 +69,7 @@ module Web
       @bulletin = Bulletin.find(params[:id])
       authorize @bulletin, :archive?, policy_class: Web::BulletinPolicy
       @bulletin.archive!
-      redirect_to profile_path
+      redirect_to profile_index_path
     end
 
     private
