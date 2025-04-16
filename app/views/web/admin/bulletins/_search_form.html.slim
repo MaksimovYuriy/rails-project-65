@@ -4,7 +4,7 @@
       .x-search-item
         = f.search_field :title_cont, class: 'x-search-input',
           placeholder: t('search.title'), label: t('search.title')
-      
+
       .x-search-item
         - states = Bulletin.aasm.states.map { |s| [t("aasm.states.#{s.name}"), s.name] }
         = f.select :state_eq, options_for_select(states, @search_query.state_eq),
