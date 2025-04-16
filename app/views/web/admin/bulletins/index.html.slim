@@ -3,19 +3,21 @@ h1
 
 = render partial: 'web/admin/shared/nav'
 
-== render 'web/bulletins/search_form', url: admin_bulletins_path
+== render 'search_form', url: admin_bulletins_path
 
 table.table
   thead
     tr
       th = t('attributes.id')
       th = t('attributes.title')
+      th = t('attributes.state')
       th = t('attributes.actions')
   tbody
     - @bulletins.each do |bulletin|
       tr
         td = bulletin.id
         td = link_to bulletin.title, bulletin_path(bulletin)
+        td = t("aasm.states.#{bulletin.state}")
         td.actions
           - if bulletin.may_to_moderate?
             = link_to t('actions.to_moderate'), to_moderate_admin_bulletin_path(bulletin), data: { 'turbo-method' => :patch,

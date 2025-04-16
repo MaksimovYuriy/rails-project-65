@@ -2,6 +2,13 @@ ru:
   languages:
     ru: 'Русский язык'
     en: 'English'
+  aasm:
+    states:
+      draft: 'Черновик'
+      under_moderation: 'На модерации'
+      rejected: 'Отклонено'
+      published: 'Опубликовано'
+      archived: 'В архиве'
   attributes:
     id: 'ID'
     title: 'Название'
@@ -38,6 +45,7 @@ ru:
       not_authorized: 'Пожалуйста, авторизируйтесь, чтобы продолжить'
       no_admin_rights: 'Отсутствуют права администратора'
     bulletins:
+      current_image: 'Текущее изображение'
       create: 'Объявление успешно создано'
       update: 'Объявление успешно обновлено'
       send_to_moderation: 'Объявление отправлено на модерацию'
@@ -46,6 +54,7 @@ ru:
       create: 'Категория успешно создана'
       update: 'Категория успешно обновлена'
       destroy: 'Категория успешно удалена'
+      destroy_error: 'Не удалось удалить категорию, она содержит объявления'
     auth:
       logged: 'Выполнен вход как'
       logout: 'Выполнен выход'
@@ -53,6 +62,8 @@ ru:
   views:
     published_by: 'Опубликовано'
   search:
+    all_states: 'Все состояния'
+    state: 'Статус'
     title: 'Название'
     category: 'Категория'
     find: 'Найти'

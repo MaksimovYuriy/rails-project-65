@@ -45,8 +45,13 @@ module Web
       def destroy
         @category = Category.find(params[:id])
         authorize @category, policy_class: Web::Admin::CategoryPolicy
-        @category&.destroy!
-        redirect_to admin_categories_path, notice: I18n.t('notices.categories.destroy')
+
+        if @category.bulletins.nil?
+          @category&.destroy!
+          redirect_to admin_categories_path, notice: I18n.t('notices.categories.destroy')
+        else
+          redirect_to admin_categories_path, alert: I18n.t('notices.categories.destroy_error')
+        end
       end
 
       private

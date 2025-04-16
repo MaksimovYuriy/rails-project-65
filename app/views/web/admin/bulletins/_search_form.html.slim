@@ -1,0 +1,18 @@
+.x-search-form
+  = search_form_for @search_query, url: do |f|
+    .x-search-row
+      .x-search-item
+        = f.search_field :title_cont, class: 'x-search-input',
+          placeholder: t('search.title'), label: t('search.title')
+      
+      .x-search-item
+        - states = Bulletin.aasm.states.map { |s| [t("aasm.states.#{s.name}"), s.name] }
+        = f.select :state_eq, options_for_select(states, @search_query.state_eq),
+            { include_blank: t('search.all_states') },
+            class: 'x-search-select', placeholder: t('search.state'), label: t('search.state')
+
+      .x-search-button
+        = f.submit t('search.find'), class: 'x-search-btn'
+
+      .x-search-button
+        = link_to t('search.reset'), url, class: 'x-search-reset'

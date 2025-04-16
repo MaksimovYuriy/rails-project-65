@@ -2,6 +2,13 @@ en:
   languages:
     ru: 'Русский язык'
     en: 'English'
+  aasm:
+    states:
+      draft: 'Draft'
+      under_moderation: 'Under moderation'
+      rejected: 'Rejected'
+      published: 'Published'
+      archived: 'Archived'
   attributes:
     id: 'ID'
     title: 'Title'
@@ -38,6 +45,7 @@ en:
       not_authorized: 'Please log in to continue'
       no_admin_rights: 'There are no administrator rights'
     bulletins:
+      current_image: 'Current image'
       create: 'Bulletin was successfully created'
       update: 'Bulletin was successfully updated'
       send_to_moderation: 'Bulletin sent to moderation'
@@ -46,6 +54,7 @@ en:
       create: 'Category was successfully created'
       update: 'Category was successfully updated'
       destroy: 'Category was successfully destroyed'
+      destroy_error: 'Could not delete category, it contains bulletins'
     auth:
       logged: 'You logged like'
       logout: 'You logout'
@@ -53,6 +62,8 @@ en:
   views:
     published_by: 'Published by'
   search:
+    all_states: 'All states'
+    state: 'State'
     title: 'Title'
     category: 'Category'
     find: 'Find'

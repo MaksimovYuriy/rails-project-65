@@ -15,7 +15,7 @@ module Web
     end
 
     def show?
-      true
+      record.state == 'published' || user&.admin?
     end
 
     def edit?

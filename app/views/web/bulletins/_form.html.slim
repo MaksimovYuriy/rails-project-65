@@ -3,5 +3,11 @@
     = f.association :category, collection: Category.all
     = f.input :title, input_html: { class: 'form-control' }
     = f.input :description, input_html: { class: 'form-control' }
+
+    - if @bulletin.image.attached?
+        .x-bulletin-show-image.w-25
+            = f.label t('notices.bulletins.current_image')
+            = image_tag @bulletin.image, class: 'img-fluid'
+
     = f.input :image, as: :file
     = f.button :submit, class: 'btn btn-primary'
