@@ -10,7 +10,6 @@ module Web
                                 .where(state: 'published')
                                 .order(created_at: :desc)
                                 .page(params[:page])
-      authorize @bulletins, policy_class: Web::BulletinPolicy
     end
 
     def show
@@ -20,7 +19,6 @@ module Web
 
     def new
       @bulletin = current_user.bulletins.build
-      authorize @bulletin, policy_class: Web::BulletinPolicy
     end
 
     def edit
@@ -29,7 +27,6 @@ module Web
     end
 
     def create
-      authorize Bulletin, policy_class: Web::BulletinPolicy
       @bulletin = current_user.bulletins.build(bulletin_params)
 
       if @bulletin.save
@@ -55,17 +52,15 @@ module Web
       @bulletins = @search_query.result
                                 .order(created_at: :desc)
                                 .page(params[:page])
-      @bulletins.each do |bulletin|
-        authorize bulletin, :profile?, policy_class: Web::BulletinPolicy
-      end
     end
 
     def to_moderate
       @bulletin = Bulletin.find(params[:id])
       authorize @bulletin, :to_moderate?, policy_class: Web::BulletinPolicy
-      if @bulletin.to_moderate!
+      begin 
+        @bulletin.to_moderate!
         redirect_to profile_path, notice: I18n.t('notices.bulletins.send_to_moderation')
-      else
+      rescue AASM::InvalidTransition
         redirect_to profile_path, alert: I18n.t('notices.bulletins.faild_to_moderation')
       end
     end

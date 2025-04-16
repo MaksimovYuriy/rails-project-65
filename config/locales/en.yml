@@ -44,6 +44,7 @@ en:
     application:
       not_authorized: 'Please log in to continue'
       no_admin_rights: 'There are no administrator rights'
+      no_rights: 'There are no rights'
     bulletins:
       current_image: 'Current image'
       create: 'Bulletin was successfully created'

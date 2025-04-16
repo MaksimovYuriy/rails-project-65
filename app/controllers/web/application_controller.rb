@@ -21,6 +21,6 @@ class Web::ApplicationController < ApplicationController
   private
 
   def user_not_authorized
-    redirect_to root_path, alert: I18n.t('notices.application.no_admin_rights')
+    redirect_to root_path, alert: I18n.t('notices.application.no_rights')
   end
 end
