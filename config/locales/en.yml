@@ -17,6 +17,7 @@ en:
     to_publish: 'To publish'
   confirmation: 'Are you sure?'
   titles:
+    profile: 'Profile'
     all_bulletins: 'All bulletins'
     my_bulletins: 'My bulletins'
     bulletins: 'Bulletins'

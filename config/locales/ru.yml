@@ -17,6 +17,7 @@ ru:
     to_publish: 'Опубликовать'
   confirmation: 'Вы уверены?'
   titles:
+    profile: 'Профиль'
     all_bulletins: 'Все объявления'
     my_bulletins: 'Мои объявления'
     bulletins: 'Объявления'
