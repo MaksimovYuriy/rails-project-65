@@ -8,7 +8,7 @@
         ul.nav.nav-pills.navbar-nav.mr-auto.align-items-center.justify-content-between
           - if session[:user_id]
             li.nav-item.me-2
-              = link_to t('links.profile'), profile_index_path, class: 'nav-link text-light'
+              = link_to t('links.profile'), profile_path, class: 'nav-link text-light'
             li.nav-item.me-2
               = link_to t('links.new_bulletin'), new_bulletin_path, class: 'nav-link text-light'
 
