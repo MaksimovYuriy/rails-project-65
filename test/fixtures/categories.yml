@@ -3,3 +3,6 @@ category1:
 
 category2:
   name: "Announcements"
+
+category_without_bulletins:
+  name: "Without bulletins"

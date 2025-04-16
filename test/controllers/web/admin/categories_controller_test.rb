@@ -26,11 +26,11 @@ class Web::Admin::CategoriesControllerTest < ActionDispatch::IntegrationTest
     assert_equal category.name, 'Updated'
   end
 
-  test 'destroy category' do
+  test 'destroy category (with bulletins)' do
     category = categories(:category1)
     category_name = category.name
     delete admin_category_path(category)
     category = Category.find_by name: category_name
-    assert { category.nil? }
+    assert { category }
   end
 end

@@ -10,9 +10,6 @@ Rails.application.routes.draw do
     get 'auth/failure', to: 'auth#failure'
 
     resources :bulletins, except: %i[destroy] do
-      collection do
-        get :search
-      end
       member do
         patch :to_moderate
         patch :archive
@@ -21,11 +18,11 @@ Rails.application.routes.draw do
 
     resource :profile, only: [:show], controller: 'bulletins', action: 'profile'
 
-    scope module: :admin do
-      get '/admin', to: 'bulletins#on_moderate', as: 'admin'
+    namespace :admin do
+      root to: 'bulletins#on_moderate'
 
-      resources :categories, except: %i[show], path: '/admin/categories', as: 'admin_categories'
-      resources :bulletins, only: %i[index], path: '/admin/bulletins', as: 'admin_bulletins' do
+      resources :categories, except: %i[show]
+      resources :bulletins, only: %i[index] do
         member do
           patch :to_moderate
           patch :reject

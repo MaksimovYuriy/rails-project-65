@@ -1,7 +1,7 @@
 ul.nav.nav-tabs.mb-3
   li.nav-item
-    = link_to t('titles.bulletins_on_moderation'), admin_path,
-        class: "nav-link #{'active' if current_page?(admin_path)}"
+    = link_to t('titles.bulletins_on_moderation'), admin_root_path,
+        class: "nav-link #{'active' if current_page?(admin_root_path)}"
   li.nav-item
     = link_to t('titles.all_bulletins'), admin_bulletins_path,
         class: "nav-link #{'active' if current_page?(admin_bulletins_path)}"
