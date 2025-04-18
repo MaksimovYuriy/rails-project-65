@@ -2,17 +2,6 @@
 
 module Web
   class BulletinPolicy < ApplicationPolicy
-    def index?
-      true
-    end
-
-    def new?
-      user
-    end
-
-    def create?
-      user
-    end
 
     def show?
       user&.id == record.user_id || record.published? || user&.admin?
@@ -23,10 +12,6 @@ module Web
     end
 
     def update?
-      record.user_id == user.id
-    end
-
-    def profile?
       record.user_id == user.id
     end
 

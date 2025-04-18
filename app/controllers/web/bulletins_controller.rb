@@ -47,13 +47,6 @@ module Web
       end
     end
 
-    def profile
-      @search_query = current_user.bulletins.ransack(params[:search_query])
-      @bulletins = @search_query.result
-                                .order(created_at: :desc)
-                                .page(params[:page])
-    end
-
     def to_moderate
       @bulletin = Bulletin.find(params[:id])
       authorize @bulletin, :to_moderate?, policy_class: Web::BulletinPolicy
