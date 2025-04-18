@@ -53,6 +53,6 @@ class Web::Admin::CategoriesControllerTest < ActionDispatch::IntegrationTest
     category_name = categories(:category_without_bulletins)[:name]
     delete admin_category_path(categories(:category_without_bulletins))
     category = Category.find_by name: category_name
-    assert { category }
+    assert_nil category 
   end
 end

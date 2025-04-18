@@ -3,25 +3,21 @@
 module Web
   module Admin
     class CategoriesController < Web::Admin::ApplicationController
-      before_action :authenticate_user!
+      before_action :authorize_admin!
 
       def index
         @categories = Category.all
-        authorize @categories, policy_class: Web::Admin::CategoryPolicy
       end
 
       def new
-        authorize Category, policy_class: Web::Admin::CategoryPolicy
         @category = Category.new
       end
 
       def edit
         @category = Category.find(params[:id])
-        authorize @category, policy_class: Web::Admin::CategoryPolicy
       end
 
       def create
-        authorize Category, policy_class: Web::Admin::CategoryPolicy
         @category = Category.new(category_params)
 
         if @category.save
@@ -33,7 +29,6 @@ module Web
 
       def update
         @category = Category.find(params[:id])
-        authorize @category, policy_class: Web::Admin::CategoryPolicy
 
         if @category.update(category_params)
           redirect_to admin_categories_path, notice: I18n.t('notices.categories.update')
@@ -44,9 +39,8 @@ module Web
 
       def destroy
         @category = Category.find(params[:id])
-        authorize @category, policy_class: Web::Admin::CategoryPolicy
 
-        if @category.bulletins.nil?
+        if @category.bulletins.empty?
           @category.destroy!
           redirect_to admin_categories_path, notice: I18n.t('notices.categories.destroy')
         else

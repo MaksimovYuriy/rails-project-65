@@ -15,7 +15,7 @@ module Web
     end
 
     def show?
-      record.state == 'published' || user&.admin?
+      user&.id == record.user_id || record.published? || user&.admin?
     end
 
     def edit?

@@ -69,7 +69,7 @@ class Web::BulletinsControllerTest < ActionDispatch::IntegrationTest
     sign_in users(:user)
 
     get bulletin_path(@bulletin)
-    assert_redirected_to root_path(locale: I18n.default_locale)
+    assert_response :success
   end
 
   test 'edit page (user - is owner)' do
