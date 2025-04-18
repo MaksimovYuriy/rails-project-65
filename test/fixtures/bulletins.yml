@@ -19,7 +19,7 @@ bulletin3:
   category: category2
   state: "draft"
 
-bulletin_without_image:
+bulletin_with_image:
   title: 'test title'
   description: 'test description'
   category: category1

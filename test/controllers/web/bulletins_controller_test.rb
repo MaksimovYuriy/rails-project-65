@@ -3,10 +3,6 @@
 require 'pundit'
 
 class Web::BulletinsControllerTest < ActionDispatch::IntegrationTest
-  setup do
-    @bulletin = bulletins(:bulletin_without_image)
-    @bulletin.image = load_image('image.jpeg')
-  end
 
   test 'index page' do
     get root_url
@@ -54,7 +50,7 @@ class Web::BulletinsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'show page without user' do
-    get bulletin_path(@bulletin)
+    get bulletin_path(bulletins(:bulletin_with_image))
     assert_redirected_to root_path(locale: I18n.default_locale)
   end
 
@@ -68,14 +64,14 @@ class Web::BulletinsControllerTest < ActionDispatch::IntegrationTest
   test 'show page with user (draft)' do
     sign_in users(:user)
 
-    get bulletin_path(@bulletin)
+    get bulletin_path(bulletins(:bulletin_with_image))
     assert_response :success
   end
 
   test 'edit page (user - is owner)' do
     sign_in users(:user)
 
-    get edit_bulletin_path(@bulletin)
+    get edit_bulletin_path(bulletins(:bulletin_with_image))
     assert_response :success
   end
 
@@ -93,20 +89,20 @@ class Web::BulletinsControllerTest < ActionDispatch::IntegrationTest
       image: load_image('image.jpeg')
     }
 
-    patch bulletin_path(@bulletin), params: { bulletin: updated_attrs }
-    assert_redirected_to bulletin_path(@bulletin, locale: I18n.default_locale)
+    patch bulletin_path(bulletins(:bulletin_with_image)), params: { bulletin: updated_attrs }
+    assert_redirected_to bulletin_path(bulletins(:bulletin_with_image), locale: I18n.default_locale)
 
-    @bulletin.reload
-    assert_equal @bulletin.title, 'updated title'
+    bulletins(:bulletin_with_image).reload
+    assert_equal bulletins(:bulletin_with_image).title, 'updated title'
   end
 
   test 'bulletin states (archived)' do
     sign_in users(:user)
 
-    @bulletin.to_moderate!
+    bulletins(:bulletin_with_image).to_moderate!
 
-    patch archive_bulletin_path(@bulletin), params: {}
+    patch archive_bulletin_path(bulletins(:bulletin_with_image)), params: {}
     assert_response :redirect
-    assert_equal 'archived', @bulletin.reload.state
+    assert_equal 'archived', bulletins(:bulletin_with_image).reload.state
   end
 end

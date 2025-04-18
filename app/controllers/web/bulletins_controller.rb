@@ -2,7 +2,7 @@
 
 module Web
   class BulletinsController < Web::ApplicationController
-    before_action :authenticate_user!, only: %i[new create edit update profile]
+    before_action :authenticate_user!, only: %i[new create edit update]
 
     def index
       @search_query = Bulletin.ransack(params[:search_query])

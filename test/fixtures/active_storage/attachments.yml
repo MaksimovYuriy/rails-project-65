@@ -1,0 +1,4 @@
+image:
+  name: image
+  record: bulletin_with_image (Bulletin)
+  blob: test_image_blob
