@@ -2,7 +2,6 @@
 
 module Web
   class BulletinPolicy < ApplicationPolicy
-
     def show?
       user&.id == record.user_id || record.published? || user&.admin?
     end

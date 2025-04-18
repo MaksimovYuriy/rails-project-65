@@ -3,7 +3,6 @@
 require 'pundit'
 
 class Web::BulletinsControllerTest < ActionDispatch::IntegrationTest
-
   test 'index page' do
     get root_url
     assert_response :success

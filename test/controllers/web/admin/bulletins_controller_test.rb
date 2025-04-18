@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class Web::Admin::BulletinsControllerTest < ActionDispatch::IntegrationTest
-
   test 'admin page (user.admin == false)' do
     sign_in users(:user)
     get admin_root_path
