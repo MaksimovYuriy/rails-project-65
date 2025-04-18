@@ -1,23 +1,23 @@
-bulletin1:
-  title: "First Bulletin"
-  description: "This is the first bulletin"
-  user: user
+bulletin_on_moderate:
+  title: "Bulletin on moderate"
+  description: "Bulletin on moderate"
+  user: admin
   category: category1
+  state: "under_moderation"
+
+bulletin_published:
+  title: "Published bulletin"
+  description: "Published bulletin"
+  user: user
+  category: category2
   state: "published"
 
-bulletin2:
-  title: "Draft Bulletin"
-  description: "This is a draft bulletin"
-  user: user
-  category: category2
-  state: "draft"
-
-bulletin3:
-  title: "Draft Bulletin"
-  description: "This is a draft bulletin"
+bulletin_rejected:
+  title: "Rejected bulletin"
+  description: "Rejected bulletin"
   user: admin
   category: category2
-  state: "draft"
+  state: "rejected"
 
 bulletin_with_image:
   title: 'test title'

@@ -57,7 +57,7 @@ class Web::BulletinsControllerTest < ActionDispatch::IntegrationTest
   test 'show page with user (published)' do
     sign_in users(:user)
 
-    get bulletin_path(bulletins(:bulletin1))
+    get bulletin_path(bulletins(:bulletin_published))
     assert_response :success
   end
 
@@ -78,7 +78,7 @@ class Web::BulletinsControllerTest < ActionDispatch::IntegrationTest
   test 'edit page (user - is not owner)' do
     sign_in users(:user)
 
-    get edit_bulletin_path(bulletins(:bulletin3))
+    get edit_bulletin_path(bulletins(:bulletin_on_moderate))
     assert_redirected_to root_path(locale: I18n.default_locale)
   end
 
@@ -96,13 +96,20 @@ class Web::BulletinsControllerTest < ActionDispatch::IntegrationTest
     assert_equal bulletins(:bulletin_with_image).title, 'updated title'
   end
 
-  test 'bulletin states (archived)' do
+  test 'bulletin to moderate' do
     sign_in users(:user)
 
-    bulletins(:bulletin_with_image).to_moderate!
+    patch to_moderate_bulletin_path(bulletins(:bulletin_with_image)), params: {}
+    bulletins(:bulletin_with_image).reload
+    assert { bulletins(:bulletin_with_image).under_moderation? }
+  end
+
+  test 'bulletin to archive' do
+    sign_in users(:user)
 
     patch archive_bulletin_path(bulletins(:bulletin_with_image)), params: {}
-    assert_response :redirect
-    assert_equal 'archived', bulletins(:bulletin_with_image).reload.state
+    bulletins(:bulletin_with_image).reload
+
+    assert { bulletins(:bulletin_with_image).archived? }
   end
 end

@@ -2,3 +2,18 @@ image:
   name: image
   record: bulletin_with_image (Bulletin)
   blob: test_image_blob
+
+image_on_moderate:
+  name: image
+  record: bulletin_on_moderate (Bulletin)
+  blob: test_image_blob
+
+image_published:
+  name: image
+  record: bulletin_published (Bulletin)
+  blob: test_image_blob
+
+image_rejected:
+  name: image
+  record: bulletin_rejected (Bulletin)
+  blob: test_image_blob
