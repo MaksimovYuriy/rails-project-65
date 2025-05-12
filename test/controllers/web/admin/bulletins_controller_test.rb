@@ -54,3 +54,5 @@ class Web::Admin::BulletinsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 end
+
+
